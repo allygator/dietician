@@ -1,8 +1,6 @@
 import React from 'react';
-import logo from '../logo.svg';
-import '../App.css';
 
-function App() {
+function Login() {
   return (
     <div className="login">
       Login page
@@ -10,4 +8,4 @@ function App() {
   );
 }
 
-export default App;
+export default Login;
