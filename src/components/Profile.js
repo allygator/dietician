@@ -2,12 +2,12 @@ import React from 'react';
 import logo from '../logo.svg';
 import '../App.css';
 
-function Login() {
+function Profile() {
   return (
-    <div className="login">
-      Login page
+    <div className="profile">
+      Profile page
     </div>
   );
 }
 
-export default Login;
+export default Profile;
