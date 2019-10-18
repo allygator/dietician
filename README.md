@@ -42,8 +42,14 @@ Get schedule blocks from Firebase.
 
 Display User defined blocks (#2C698D), Exercise Blocks (#E3F6F5), Food Blocks (#BAE8E8)
 
+Blocks will be selectable and display the requisite information to that block
+
 ## Other Functionality
 
 ### Schedule generator
 
 Get user schedule, send recommended exercise/food schedule to database
+
+### Header
+
+Navigation to get to profile and Calendar pages
