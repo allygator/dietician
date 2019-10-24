@@ -5,9 +5,9 @@ const generateSchedule = (timeArr) => {
 	return combinedSchedule
 }
 
-generateExerciseSchedule = (timeArr, feedingSchedule, buffer = 15, duration = 60) => {
+const generateExerciseSchedule = (timeArr, feedingSchedule, buffer = 15, duration = 60) => {
 	const freeTime = []
-	arrLen = timeArr.length
+	const arrLen = timeArr.length
 	for (let i = 0; i < arrLen - 1; i += 2) {
 		let available = timeArr[i+1] - timeArr[i]
 		let start = timeArr[i]
@@ -42,11 +42,11 @@ generateExerciseSchedule = (timeArr, feedingSchedule, buffer = 15, duration = 60
 	return schedule
 }
 
-generateFeedingSchedule = (timeArr, wakeTime = 390, sleepTime = 1320, buffer = 15, duration = 30) => {
+const generateFeedingSchedule = (timeArr, wakeTime = 390, sleepTime = 1320, buffer = 15, duration = 30) => {
 	const freeTime = []
 	timeArr.unshift(wakeTime)
 	timeArr.push(sleepTime)
-	arrLen = timeArr.length
+	const arrLen = timeArr.length
 	const dontEatRightBeforeBed = 180
 	for (let i = 0; i < arrLen - 1; i += 2) {
 		let available = timeArr[i+1] - timeArr[i]
@@ -78,7 +78,7 @@ generateFeedingSchedule = (timeArr, wakeTime = 390, sleepTime = 1320, buffer = 1
 	return totalSchedule
 }
 
-calcSchedule = (freeTime, buffer, timeBetween, visited, currentIndex, size, feedTime, totalSchedule) => {
+const calcSchedule = (freeTime, buffer, timeBetween, visited, currentIndex, size, feedTime, totalSchedule) => {
 	if (feedTime.length == 3)
 	{
 		totalSchedule.push(feedTime.slice())
