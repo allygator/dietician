@@ -7,16 +7,31 @@ const generateSchedule = (
   mealDuration = 30,
   exerciseDuration = 60
 ) => {
-  const feedingSchedule = generateFeedingSchedule(timeArr, wakeTime, sleepTime, mealBuffer, mealDuration);
-  if (feedingSchedule.length === 0) {
-    console.log("You have no time to eat! Input a better schedule or shorten your meal buffer/duration.")
-  }
-  const combinedSchedule = generateExerciseSchedule(timeArr, feedingSchedule, exerciseBuffer, exerciseDuration, mealBuffer, mealDuration);
-  if (combinedSchedule.length === 0) {
-    console.log("You have no time to exercise! Input a better schedule or shorten your exercise buffer/duration.")
-  }
+  const feedingSchedule = generateFeedingSchedule(
+    timeArr,
+    wakeTime,
+    sleepTime,
+    mealBuffer,
+    mealDuration
+  );
+  const combinedSchedule = generateExerciseSchedule(
+    timeArr,
+    feedingSchedule,
+    exerciseBuffer,
+    exerciseDuration,
+    mealBuffer,
+    mealDuration
+  );
 
-  return combinedSchedule;
+  return {
+    wake: wakeTime,
+    sleep: sleepTime,
+    mealDuration: mealDuration,
+    mealBuffer: mealBuffer,
+    exerciseDuration: exerciseDuration,
+    exerciseBuffer: exerciseBuffer,
+    possibleSchedule: combinedSchedule,
+  };
 };
 
 const generateExerciseSchedule = (
@@ -46,52 +61,43 @@ const generateExerciseSchedule = (
     for (let i = 0; i < feedingSchedule.length; i++) {
       if (freeTime[h] + exerciseBuffer + exerciseDuration < feedingSchedule[i][0]) {
         schedule.push({
-          'meals': [
-            feedingSchedule[i][0], 
-            feedingSchedule[i][1], 
-            feedingSchedule[i][2]
-          ], 
-          'exercise': [
-            freeTime[h]
-          ]
+          meals: [feedingSchedule[i][0], feedingSchedule[i][1], feedingSchedule[i][2]],
+          exercise: [freeTime[h]],
         });
-      } else if (freeTime[h] + exerciseBuffer + exerciseDuration < feedingSchedule[i][1]) {
-        if (freeTime[h] - feedingSchedule[i][0] > mealBuffer + mealDuration + restAfterEating) {
+      } else if (
+        freeTime[h] + exerciseBuffer + exerciseDuration <
+        feedingSchedule[i][1]
+      ) {
+        if (
+          freeTime[h] - feedingSchedule[i][0] >
+          mealBuffer + mealDuration + restAfterEating
+        ) {
           schedule.push({
-            'meals': [
-              feedingSchedule[i][0], 
-              feedingSchedule[i][1], 
-              feedingSchedule[i][2]
-            ], 
-            'exercise': [
-              freeTime[h]
-            ]
+            meals: [feedingSchedule[i][0], feedingSchedule[i][1], feedingSchedule[i][2]],
+            exercise: [freeTime[h]],
           });
         }
-      } else if (freeTime[h] + exerciseBuffer + exerciseDuration < feedingSchedule[i][2]) {
-        if (freeTime[h] - feedingSchedule[i][1] > mealBuffer + mealDuration + restAfterEating) {
+      } else if (
+        freeTime[h] + exerciseBuffer + exerciseDuration <
+        feedingSchedule[i][2]
+      ) {
+        if (
+          freeTime[h] - feedingSchedule[i][1] >
+          mealBuffer + mealDuration + restAfterEating
+        ) {
           schedule.push({
-            'meals': [
-              feedingSchedule[i][0], 
-              feedingSchedule[i][1], 
-              feedingSchedule[i][2]
-            ], 
-            'exercise': [
-              freeTime[h]
-            ]
+            meals: [feedingSchedule[i][0], feedingSchedule[i][1], feedingSchedule[i][2]],
+            exercise: [freeTime[h]],
           });
         }
       } else {
-        if (freeTime[h] - feedingSchedule[i][2] > mealBuffer + mealDuration + restAfterEating) {
+        if (
+          freeTime[h] - feedingSchedule[i][2] >
+          mealBuffer + mealDuration + restAfterEating
+        ) {
           schedule.push({
-            'meals': [
-              feedingSchedule[i][0], 
-              feedingSchedule[i][1], 
-              feedingSchedule[i][2]
-            ], 
-            'exercise': [
-              freeTime[h]
-            ]
+            meals: [feedingSchedule[i][0], feedingSchedule[i][1], feedingSchedule[i][2]],
+            exercise: [freeTime[h]],
           });
         }
       }
@@ -201,9 +207,10 @@ const calcSchedule = (
 
 exports.handler = function(event, context, callback) {
   const body = JSON.parse(event.body);
-  // input: array of start and end time in minutes ([400, 460, 700, 900])
-  // output: array of objects where each object is a possible time schedule
-  //         the key is the exercise time and the value is an array of meal times
+  // input:  array of start and end time in minutes,
+  //         ex.   [500, 660, 740, 920, 1100, 1220]
+  // output: Object containing relevant information and possible schedules
+  //         in the form of an array of objects
   const retVal = generateSchedule(body);
   callback(null, {
     statusCode: 200,
