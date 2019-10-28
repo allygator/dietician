@@ -107,13 +107,7 @@ const generateExerciseSchedule = (
   return schedule;
 };
 
-const generateFeedingSchedule = (
-  timeArr,
-  wakeTime = 390,
-  sleepTime = 1320,
-  buffer = 15,
-  duration = 30
-) => {
+const generateFeedingSchedule = (timeArr, wakeTime, sleepTime, buffer, duration) => {
   const freeTime = [];
   timeArr.unshift(wakeTime);
   timeArr.push(sleepTime);
