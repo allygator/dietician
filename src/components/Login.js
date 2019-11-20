@@ -27,11 +27,9 @@ function Login() {
   const handleClick = name => event => {};
 
   function signin(email, pass) {
-    firebase
-      .doSignInWithEmailAndPassword(email, pass)
-      .catch(error => {
-        console.log(error);
-      });
+    firebase.doSignInWithEmailAndPassword(email, pass).catch(error => {
+      console.log(error);
+    });
   }
 
   function signup(email, pass) {
@@ -54,67 +52,68 @@ function Login() {
       });
   }
 
-  let fields = (
-      <div>
-    <div className="login_fields">
-      Dietician Login
-      <TextField
-        id="email"
-        defaultValue={signinInputs.email}
-        label="Email"
-        variant="outlined"
-        required={true}
-        onChange={handleChangeIn("email")}
-        fullWidth
-        margin="normal"
-      />
-      <TextField
-        id="password"
-        defaultValue={signinInputs.password}
-        label="Password"
-        variant="outlined"
-        required={true}
-        onChange={handleChangeIn("password")}
-        fullWidth
-        margin="normal"
-      />
-      <FormControlLabel
-            control={
-                <Checkbox
-                      checked={newUser}
-                      onChange={toggle}
-                      value="newUser"
-                      inputProps={{
-                        'aria-label': 'primary checkbox',
-                      }}
-                    />
-            }
-            label="Check if you are a new user"
-          />
-
-  <Button variant="contained" id="submitButton" onClick={()=> signin(signinInputs.email, signinInputs.password)}>
-        Login
-      </Button>
-    </div>
+  const fields = (
+    <div>
+      <div className="login_fields">
+        Dietician Login
+        <TextField
+          id="email"
+          defaultValue={signinInputs.email}
+          label="Email"
+          variant="outlined"
+          required={true}
+          onChange={handleChangeIn("email")}
+          fullWidth
+          margin="normal"
+        />
+        <TextField
+          id="password"
+          defaultValue={signinInputs.password}
+          label="Password"
+          variant="outlined"
+          required={true}
+          onChange={handleChangeIn("password")}
+          fullWidth
+          margin="normal"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={newUser}
+              onChange={toggle}
+              value="newUser"
+              inputProps={{
+                "aria-label": "primary checkbox",
+              }}
+            />
+          }
+          label="Check if you are a new user"
+        />
+        <Button
+          variant="contained"
+          id="submitButton"
+          onClick={() => signin(signinInputs.email, signinInputs.password)}
+        >
+          Login
+        </Button>
+      </div>
     </div>
   );
 
   return (
-<div className="login">
-  <div className="signin">
-    {userData.authUser ? (
-      <Redirect
-        to={{
-          pathname: "/calendar",
-        }}
-      />
-    ) : (
-      fields
-    )}
-  </div>
-</div>
-
-
+    <div className="login">
+      <div className="signin">
+        {userData.authUser ? (
+          <Redirect
+            to={{
+              pathname: "/calendar",
+            }}
+          />
+        ) : (
+          fields
+        )}
+      </div>
+    </div>
   );
 }
 
