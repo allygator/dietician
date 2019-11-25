@@ -70,7 +70,7 @@ function renderDays({ day, date, isToday }, index) {
       style={{ flex: `0 0 calc((100% - 3rem) / ${nColumn})` }}
     >
       <span>{date}</span>
-      <span>{DAYS[day]}</span>
+      <span>{day}</span>
     </div>
   );
 }
@@ -98,7 +98,7 @@ function getDay() {
 
   return [
     {
-      day: d.getDay(),
+      day: DAYS[d.getDay()],
       date: d.getDate(),
       isToday: true,
     },
@@ -107,26 +107,35 @@ function getDay() {
 
 function getThreeDay() {
   const d = new Date();
-  const today = d.getDate();
-  const day = d.getDay();
   const days = [];
 
-  for (let i = 0; i < 3; i++)
-    days.push({ day: day + i, date: today + i, isToday: i === 0 });
+  for (let i = 0; i < 3; i++) {
+    days.push({
+      day: DAYS[d.getDay()],
+      date: d.getDate(),
+      isToday: i === 0,
+    });
+    d.setDate(d.getDate() + 1);
+  }
 
   return days;
 }
 
 function getWeekDays() {
   const d = new Date();
-  const today = d.getDate();
-  const base = today - d.getDay();
+  const today = d.getDay();
   const days = [];
-  let date;
+
+  // set the date to the beginning of the week i.e Sunday
+  d.setDate(d.getDate() - d.getDay());
 
   for (let i = 0; i < 7; i++) {
-    date = base + i;
-    days.push({ day: i, date, isToday: today === date });
+    days.push({
+      day: DAYS[d.getDay()],
+      date: d.getDate(),
+      isToday: i === today,
+    });
+    d.setDate(d.getDate() + 1);
   }
 
   return days;
