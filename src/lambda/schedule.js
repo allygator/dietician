@@ -66,13 +66,13 @@ const generateExerciseSchedule = (
   }
 
   const restAfterEating = Math.min(60, 60 - exerciseBuffer);
-
+  const originalBusyTimes = busyTimes.slice(1, busyTime.length - 1);
   const schedule = [];
   for (let h = 0; h < freeTime.length; h++) {
     for (let i = 0; i < feedingSchedule.length; i++) {
       if (freeTime[h] + exerciseBuffer + exerciseDuration < feedingSchedule[i][0]) {
         schedule.push({
-          busy: busyTimes,
+          busy: originalBusyTimes,
           meals: [feedingSchedule[i][0], feedingSchedule[i][1], feedingSchedule[i][2]],
           exercise: [freeTime[h]],
         });
@@ -85,7 +85,7 @@ const generateExerciseSchedule = (
           mealBuffer + mealDuration + restAfterEating
         ) {
           schedule.push({
-            busy: busyTimes,
+            busy: originalBusyTimes,
             meals: [feedingSchedule[i][0], feedingSchedule[i][1], feedingSchedule[i][2]],
             exercise: [freeTime[h]],
           });
@@ -99,7 +99,7 @@ const generateExerciseSchedule = (
           mealBuffer + mealDuration + restAfterEating
         ) {
           schedule.push({
-            busy: busyTimes,
+            busy: originalBusyTimes,
             meals: [feedingSchedule[i][0], feedingSchedule[i][1], feedingSchedule[i][2]],
             exercise: [freeTime[h]],
           });
@@ -110,7 +110,7 @@ const generateExerciseSchedule = (
           mealBuffer + mealDuration + restAfterEating
         ) {
           schedule.push({
-            busy: busyTimes,
+            busy: originalBusyTimes,
             meals: [feedingSchedule[i][0], feedingSchedule[i][1], feedingSchedule[i][2]],
             exercise: [freeTime[h]],
           });
