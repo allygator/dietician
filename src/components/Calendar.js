@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import TaskBlock from "./TaskBlock";
 
@@ -7,121 +7,14 @@ import "./Calendar.css";
 const DAYS = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
 
 const HOURS = fillHours();
-const sampleTask = {
-  wake: 390,
-  sleep: 1320,
-  mealDuration: 30,
-  mealBuffer: 15,
-  exerciseDuration: 60,
-  exerciseBuffer: 15,
-  possibleSchedule: [
-    [
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [390, 690, 1035],
-        exercise: [495],
-      },
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [435, 690, 1035],
-        exercise: [1235],
-      },
-    ],
-    [
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [390, 690, 1035],
-        exercise: [495],
-      },
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [435, 690, 1035],
-        exercise: [1235],
-      },
-    ],
-    [
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [390, 690, 1035],
-        exercise: [495],
-      },
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [435, 690, 1035],
-        exercise: [1235],
-      },
-    ],
-    [
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [390, 690, 1035],
-        exercise: [495],
-      },
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [435, 690, 1035],
-        exercise: [1235],
-      },
-    ],
-    [
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [390, 690, 1035],
-        exercise: [495],
-      },
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [435, 690, 1035],
-        exercise: [1235],
-      },
-    ],
-    [
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [390, 690, 1035],
-        exercise: [495],
-      },
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [435, 690, 1035],
-        exercise: [1235],
-      },
-    ],
-    [
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [390, 690, 1035],
-        exercise: [495],
-      },
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [435, 690, 1035],
-        exercise: [1235],
-      },
-    ],
-  ],
-};
 
-const formatTask = sampleTask.possibleSchedule.map(day => [
-  {
-    meals: day[0].meals.map(meal => ({ start: meal, end: meal + 15 })),
-    exercise: day[0].exercise.map(exercise => ({
-      start: exercise,
-      end: exercise + 30,
-    })),
-    busy: day[0].busy
-      .map((element, index) =>
-        index % 2 === 0 ? { start: element, end: day[0].busy[index + 1] } : 0
-      )
-      .filter(time => time !== 0),
-  },
-]);
-
-console.log(formatTask);
-
-export default function Calendar() {
+export default function Calendar(props) {
   const [weekDays, setWeekDays] = useState(getWeekDays());
-  const [events, setEvents] = useState(formatTask);
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    if (props.tasks) setTasks(props.tasks);
+  }, [props.tasks]);
 
   const handleChange = ({ target }) => {
     const { value } = target;
@@ -129,7 +22,6 @@ export default function Calendar() {
     switch (Number(value)) {
       case 1:
         setWeekDays(getDay());
-        setEvents(sampleTask.possibleSchedule[new Date().getDay]);
         break;
       case 3:
         setWeekDays(getThreeDay());
@@ -170,20 +62,36 @@ export default function Calendar() {
               </div>
             ))}
 
-            {events[index][0].meals.map((block, index) => (
-              <TaskBlock key={index} type="Food" start={block.start} end={block.end} />
-            ))}
-            {events[index][0].exercise.map((block, index) => (
-              <TaskBlock
-                key={index}
-                type="Exercise"
-                start={block.start}
-                end={block.end}
-              />
-            ))}
-            {events[index][0].busy.map((block, index) => (
-              <TaskBlock key={index} type="Work" start={block.start} end={block.end} />
-            ))}
+            {tasks[index]
+              ? tasks[index][0].meals.map((block, index) => (
+                  <TaskBlock
+                    key={index}
+                    type="Food"
+                    start={block.start}
+                    end={block.end}
+                  />
+                ))
+              : null}
+            {tasks[index]
+              ? tasks[index][0].exercise.map((block, index) => (
+                  <TaskBlock
+                    key={index}
+                    type="Exercise"
+                    start={block.start}
+                    end={block.end}
+                  />
+                ))
+              : null}
+            {tasks[index]
+              ? tasks[index][0].busy.map((block, index) => (
+                  <TaskBlock
+                    key={index}
+                    type="Work"
+                    start={block.start}
+                    end={block.end}
+                  />
+                ))
+              : null}
           </div>
         ))}
       </div>
