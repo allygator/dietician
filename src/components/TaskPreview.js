@@ -22,6 +22,7 @@ function EventReview(props) {
   const style = {
     position: "absolute",
     width: "22em",
+    top: "-3em",
     padding: "1em",
     borderRadius: "1em",
     boxShadow: "-3px 4px 28px rgba(0,0,0,0.5), 10px 4px 10px rgba(0,0,0,0.5)",
@@ -29,10 +30,17 @@ function EventReview(props) {
     zIndex: "10",
   };
 
-  if (window.innerWidth / 2 < pos.x) {
+  console.log(pos);
+  console.log(pos.x);
+  console.log(window.innerHeight);
+
+  if (pos.x > 500) {
+    console.log(pos.x);
     style.left = "-23em";
-  } else {
+  } else if (window.innerWidth - pos.x - pos.width > 500) {
     style.right = "-23em";
+  } else {
+    style.top = "-15em";
   }
 
   return (
