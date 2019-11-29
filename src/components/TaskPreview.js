@@ -30,12 +30,7 @@ function EventReview(props) {
     zIndex: "10",
   };
 
-  console.log(pos);
-  console.log(pos.x);
-  console.log(window.innerHeight);
-
   if (pos.x > 500) {
-    console.log(pos.x);
     style.left = "-23em";
   } else if (window.innerWidth - pos.x - pos.width > 500) {
     style.right = "-23em";
