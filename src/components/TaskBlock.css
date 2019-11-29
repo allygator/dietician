@@ -1,0 +1,20 @@
+.calendar__task {
+  position: absolute;
+  width: 95%;
+  height: 3rem;
+  top: 0.5rem;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
+
+.calendar__task.calendar_task_work {
+  background-color: #2c698d;
+}
+
+.calendar__task.calendar_task_exercise {
+  background-color: #e3f6f5;
+}
+
+.calendar__task.calendar_task_food {
+  background-color: #0b8044;
+}
