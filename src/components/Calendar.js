@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+import TaskBlock from "./TaskBlock";
 
 import "./Calendar.css";
 
@@ -6,8 +8,13 @@ const DAYS = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
 
 const HOURS = fillHours();
 
-export default function Calendar() {
+export default function Calendar(props) {
   const [weekDays, setWeekDays] = useState(getWeekDays());
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    if (props.tasks) setTasks(props.tasks);
+  }, [props.tasks]);
 
   const handleChange = ({ target }) => {
     const { value } = target;
@@ -54,6 +61,37 @@ export default function Calendar() {
                 <span />
               </div>
             ))}
+
+            {tasks[index]
+              ? tasks[index][0].meals.map((block, index) => (
+                  <TaskBlock
+                    key={index}
+                    type="Food"
+                    start={block.start}
+                    end={block.end}
+                  />
+                ))
+              : null}
+            {tasks[index]
+              ? tasks[index][0].exercise.map((block, index) => (
+                  <TaskBlock
+                    key={index}
+                    type="Exercise"
+                    start={block.start}
+                    end={block.end}
+                  />
+                ))
+              : null}
+            {tasks[index]
+              ? tasks[index][0].busy.map((block, index) => (
+                  <TaskBlock
+                    key={index}
+                    type="Work"
+                    start={block.start}
+                    end={block.end}
+                  />
+                ))
+              : null}
           </div>
         ))}
       </div>

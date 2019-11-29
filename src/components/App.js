@@ -5,6 +5,7 @@ import Home from "./Home";
 import Login from "./Login";
 import Calendar from "./Calendar";
 import Profile from "./Profile";
+import CalendarChoices from "./CalendarChoices";
 
 function App() {
   //Add additional routes here following the login route example
@@ -15,6 +16,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/calendar" component={Calendar} />
         <Route path="/profile" component={Profile} />
+        <Route path="/calendar-choices" component={CalendarChoices} />
       </Switch>
     </Router>
   );

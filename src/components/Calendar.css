@@ -13,8 +13,8 @@
 /*============================ ROW 1 ==================================*/
 .calendar__nav__header {
   width: 100%;
-  height: 3rem;
-  padding: 0 1rem;
+  height: 3em;
+  padding: 0 1em;
   display: flex;
   align-items: center;
   box-sizing: border-box;
@@ -26,14 +26,14 @@
   position: sticky;
   top: 0;
   display: flex;
-  height: 4rem;
+  height: 4em;
   background-color: white;
   border-bottom: 1px solid var(--border-color);
   z-index: 1;
 }
 
 .calendar__day__gap {
-  flex: 0 0 3rem;
+  flex: 0 0 3em;
   height: inherit;
   border-right: 1px solid var(--border-color);
 }
@@ -58,9 +58,9 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 4rem;
-  height: 4rem;
-  line-height: 4rem;
+  width: 4em;
+  height: 4em;
+  line-height: 4em;
   text-align: center;
   text-transform: uppercase;
   font-weight: bold;
@@ -70,7 +70,7 @@
   width: 100%;
   height: inherit;
   text-align: center;
-  line-height: 4rem;
+  line-height: 4em;
   text-transform: uppercase;
   font-weight: bold;
 }
@@ -85,7 +85,7 @@
 }
 
 .calendar__time__column:first-child {
-  flex: 0 0 3rem;
+  flex: 0 0 3em;
 }
 
 .calendar__time__column {
@@ -101,14 +101,14 @@
 
 /* the gap column for hours */
 .calendar__time__column:first-child > .calendar__time__row {
-  line-height: 4rem;
+  line-height: 4em;
   text-align: right;
-  padding-right: 0.5rem;
+  padding-right: 0.5em;
 }
 
 .calendar__time__row {
   position: relative;
-  height: 4rem;
+  height: 4em;
   border-bottom: 1px solid var(--border-color);
 }
 
