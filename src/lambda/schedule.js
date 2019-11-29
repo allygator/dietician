@@ -1,5 +1,5 @@
 const generateSchedule = (
-  timeArr,
+  busyTimesArray,
   wakeTime = 390,
   sleepTime = 1320,
   mealBuffer = 15,
@@ -7,21 +7,32 @@ const generateSchedule = (
   mealDuration = 30,
   exerciseDuration = 60
 ) => {
-  const feedingSchedule = generateFeedingSchedule(
-    timeArr,
-    wakeTime,
-    sleepTime,
-    mealBuffer,
-    mealDuration
-  );
-  const combinedSchedule = generateExerciseSchedule(
-    timeArr,
-    feedingSchedule,
-    exerciseBuffer,
-    exerciseDuration,
-    mealBuffer,
-    mealDuration
-  );
+  const possibleSchedule = [];
+  busyTimesArray.forEach(busyTimes => {
+    const feedingSchedule = generateFeedingSchedule(
+      busyTimes,
+      wakeTime,
+      sleepTime,
+      mealBuffer,
+      mealDuration
+    );
+    const combinedSchedule = generateExerciseSchedule(
+      busyTimes,
+      feedingSchedule,
+      exerciseBuffer,
+      exerciseDuration,
+      mealBuffer,
+      mealDuration
+    );
+    if (combinedSchedule.length > 2) {
+      possibleSchedule.push([
+        combinedSchedule[0],
+        combinedSchedule[combinedSchedule.length - 1],
+      ]);
+    } else {
+      possibleSchedule.push(combinedSchedule);
+    }
+  });
 
   return {
     wake: wakeTime,
@@ -30,12 +41,12 @@ const generateSchedule = (
     mealBuffer: mealBuffer,
     exerciseDuration: exerciseDuration,
     exerciseBuffer: exerciseBuffer,
-    possibleSchedule: combinedSchedule,
+    possibleSchedule: possibleSchedule,
   };
 };
 
 const generateExerciseSchedule = (
-  timeArr,
+  busyTimes,
   feedingSchedule,
   exerciseBuffer,
   exerciseDuration,
@@ -43,10 +54,10 @@ const generateExerciseSchedule = (
   mealDuration
 ) => {
   const freeTime = [];
-  const arrLen = timeArr.length;
+  const arrLen = busyTimes.length;
   for (let i = 0; i < arrLen - 1; i += 2) {
-    let available = timeArr[i + 1] - timeArr[i];
-    let start = timeArr[i];
+    let available = busyTimes[i + 1] - busyTimes[i];
+    let start = busyTimes[i];
     while (available > exerciseDuration + 2 * exerciseBuffer) {
       freeTime.push(start + (i === 0 ? 0 : exerciseBuffer));
       available -= 15;
@@ -55,12 +66,13 @@ const generateExerciseSchedule = (
   }
 
   const restAfterEating = Math.min(60, 60 - exerciseBuffer);
-
+  const originalBusyTimes = busyTimes.slice(1, busyTime.length - 1);
   const schedule = [];
   for (let h = 0; h < freeTime.length; h++) {
     for (let i = 0; i < feedingSchedule.length; i++) {
       if (freeTime[h] + exerciseBuffer + exerciseDuration < feedingSchedule[i][0]) {
         schedule.push({
+          busy: originalBusyTimes,
           meals: [feedingSchedule[i][0], feedingSchedule[i][1], feedingSchedule[i][2]],
           exercise: [freeTime[h]],
         });
@@ -73,6 +85,7 @@ const generateExerciseSchedule = (
           mealBuffer + mealDuration + restAfterEating
         ) {
           schedule.push({
+            busy: originalBusyTimes,
             meals: [feedingSchedule[i][0], feedingSchedule[i][1], feedingSchedule[i][2]],
             exercise: [freeTime[h]],
           });
@@ -86,6 +99,7 @@ const generateExerciseSchedule = (
           mealBuffer + mealDuration + restAfterEating
         ) {
           schedule.push({
+            busy: originalBusyTimes,
             meals: [feedingSchedule[i][0], feedingSchedule[i][1], feedingSchedule[i][2]],
             exercise: [freeTime[h]],
           });
@@ -96,6 +110,7 @@ const generateExerciseSchedule = (
           mealBuffer + mealDuration + restAfterEating
         ) {
           schedule.push({
+            busy: originalBusyTimes,
             meals: [feedingSchedule[i][0], feedingSchedule[i][1], feedingSchedule[i][2]],
             exercise: [freeTime[h]],
           });
@@ -107,15 +122,21 @@ const generateExerciseSchedule = (
   return schedule;
 };
 
-const generateFeedingSchedule = (timeArr, wakeTime, sleepTime, buffer, duration) => {
+const generateFeedingSchedule = (
+  busyTimes,
+  wakeTime = 390,
+  sleepTime = 1320,
+  buffer = 15,
+  duration = 30
+) => {
   const freeTime = [];
-  timeArr.unshift(wakeTime);
-  timeArr.push(sleepTime);
-  const arrLen = timeArr.length;
+  busyTimes.unshift(wakeTime);
+  busyTimes.push(sleepTime);
+  const arrLen = busyTimes.length;
   const dontEatRightBeforeBed = 180;
   for (let i = 0; i < arrLen - 1; i += 2) {
-    let available = timeArr[i + 1] - timeArr[i];
-    let start = timeArr[i];
+    let available = busyTimes[i + 1] - busyTimes[i];
+    let start = busyTimes[i];
     while (
       available >
       duration + (i === arrLen - 2 ? dontEatRightBeforeBed : (i === 0 ? 1 : 2) * buffer)
