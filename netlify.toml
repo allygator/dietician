@@ -3,7 +3,7 @@
   functions = "./lambda"
   publish = "build"
 
-  [[redirects]]
+[[redirects]]
     from = "/*"
     to = "/index.html"
     status = 200
