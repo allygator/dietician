@@ -66,7 +66,7 @@ const generateExerciseSchedule = (
   }
 
   const restAfterEating = Math.min(60, 60 - exerciseBuffer);
-  const originalBusyTimes = busyTimes.slice(1, busyTime.length - 1);
+  const originalBusyTimes = busyTimes.slice(1, busyTimes.length - 1);
   const schedule = [];
   for (let h = 0; h < freeTime.length; h++) {
     for (let i = 0; i < feedingSchedule.length; i++) {
@@ -222,10 +222,24 @@ const calcSchedule = (
 
 exports.handler = function(event, context, callback) {
   const body = JSON.parse(event.body);
-  // input:  array of start and end time in minutes,
-  //         ex.   [500, 660, 740, 920, 1100, 1220]
+  // input:  array of 7 arrays containing start and end time
+  //         units in minutes after midnight,
+  //         ex.   [[500, 660, 740, 920, 1100, 1220],
+  //                [500, 660, 740, 920, 1100, 1220],
+  //                [500, 660, 740, 920, 1100, 1220],
+  //                [500, 660, 740, 920, 1100, 1220],
+  //                [500, 660, 740, 920, 1100, 1220],
+  //                [500, 660, 740, 920, 1100, 1220],
+  //                [500, 660, 740, 920, 1100, 1220]]
+  //         with optional parameters:
+  //            wakeTime (default = 390)
+  //            sleepTime (default = 1320)
+  //            mealBuffer (default = 15)
+  //            exerciseBuffer (default = 15)
+  //            mealDuration (default = 30)
+  //            exerciseDuration (default = 60)
   // output: Object containing relevant information and possible schedules
-  //         in the form of an array of objects
+  //         in the form of an array containing 7 arrays of of objects
   const retVal = generateSchedule(body);
   callback(null, {
     statusCode: 200,
