@@ -59,34 +59,30 @@ export default CalendarChoices;
 
 const formatTask = sampleTask => {
   return [
-    sampleTask.possibleSchedule.map(day => [
-      {
-        meals: day[0].meals.map(meal => ({ start: meal, end: meal + 15 })),
-        exercise: day[0].exercise.map(exercise => ({
-          start: exercise,
-          end: exercise + 30,
-        })),
-        busy: day[0].busy
-          .map((element, index) =>
-            index % 2 === 0 ? { start: element, end: day[0].busy[index + 1] } : 0
-          )
-          .filter(time => time !== 0),
-      },
-    ]),
-    sampleTask.possibleSchedule.map(day => [
-      {
-        meals: day[1].meals.map(meal => ({ start: meal, end: meal + 15 })),
-        exercise: day[1].exercise.map(exercise => ({
-          start: exercise,
-          end: exercise + 30,
-        })),
-        busy: day[1].busy
-          .map((element, index) =>
-            index % 2 === 0 ? { start: element, end: day[1].busy[index + 1] } : 0
-          )
-          .filter(time => time !== 0),
-      },
-    ]),
+    sampleTask.possibleSchedule.map(day => ({
+      meals: day[0].meals.map(meal => ({ start: meal, end: meal + 15 })),
+      exercise: day[0].exercise.map(exercise => ({
+        start: exercise,
+        end: exercise + 30,
+      })),
+      busy: day[0].busy
+        .map((element, index) =>
+          index % 2 === 0 ? { start: element, end: day[0].busy[index + 1] } : 0
+        )
+        .filter(time => time !== 0),
+    })),
+    sampleTask.possibleSchedule.map(day => ({
+      meals: day[1].meals.map(meal => ({ start: meal, end: meal + 15 })),
+      exercise: day[1].exercise.map(exercise => ({
+        start: exercise,
+        end: exercise + 30,
+      })),
+      busy: day[1].busy
+        .map((element, index) =>
+          index % 2 === 0 ? { start: element, end: day[1].busy[index + 1] } : 0
+        )
+        .filter(time => time !== 0),
+    })),
   ];
 };
 

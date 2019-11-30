@@ -1,139 +1,175 @@
-import React from "react";
-import { useState } from "react";
-import "../App.css";
-
+import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
+import Container from "@material-ui/core/Container";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
 import Button from "@material-ui/core/Button";
 
-function Profile() {
+import CalendarForm from "./CalendarForm/CalendarForm";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    marginTop: "2rem",
+    marginBottom: "5rem",
+    fontSize: "1rem",
+  },
+  inputGroup: {
+    display: "flex",
+  },
+  input: {
+    margin: "0.5rem 0.4rem",
+  },
+  formControl: {
+    flex: 1,
+    margin: "0.5rem 0.4rem",
+  },
+  calendar: {
+    fontSize: "0.9rem",
+  },
+  btn: {
+    margin: "3rem 0",
+  },
+}));
+
+function BiometricForm() {
   const [profileInputs, setProfile] = useState({
-    heightFeet: "",
-    heightInches: "",
+    firstName: "",
+    lastName: "",
+    height: "",
     weight: "",
     age: "",
     gender: "",
     selectedOption: "",
-    schedule: "",
+    schedule: [[], [], [], [], [], [], []],
   });
+
+  const classes = useStyles();
 
   const handleChangeIn = name => event => {
     setProfile({ ...profileInputs, [name]: event.target.value });
   };
 
-  const handleClick = name => event => {
-    //var height = profileInputs.heightFeet * 12 + profileInputs.heightInches;
+  const handleScheduleIn = value => {
+    setProfile({ ...profileInputs, schedule: value });
+  };
+
+  const handleSubmit = () => {
+    // Code for submit here
+    console.log(profileInputs);
   };
 
   return (
-    <div className="profileFields">
-      Profile Information
-      <br></br>
-      <br></br>
-      Height
-      <TextField
-        id="heightFeet"
-        defaultValue={profileInputs.heightFeet}
-        label="feet"
-        variant="outlined"
-        required={true}
-        onChange={handleChangeIn("heightFeet")}
-        fullWidth
-        margin="normal"
+    <Container className={classes.root}>
+      <h3> Personal Information</h3>
+      <div className={classes.inputGroup}>
+        <FormControl className={classes.formControl}>
+          <FormLabel component="legend">First Name</FormLabel>
+          <TextField
+            value={profileInputs.firstName}
+            label="Enter"
+            variant="outlined"
+            required={true}
+            multiline
+            onChange={handleChangeIn("firstName")}
+            fullWidth
+            margin="normal"
+          />
+        </FormControl>
+
+        <FormControl className={classes.formControl}>
+          <FormLabel component="legend">Last Name</FormLabel>
+          <TextField
+            value={profileInputs.lastName}
+            label="Enter"
+            variant="outlined"
+            required={true}
+            onChange={handleChangeIn("lastName")}
+            fullWidth
+            margin="normal"
+          />
+        </FormControl>
+      </div>
+      <div className={classes.inputGroup}>
+        <FormControl className={classes.formControl}>
+          <FormLabel component="legend">Height</FormLabel>
+
+          <TextField
+            value={profileInputs.height}
+            label="feet"
+            variant="outlined"
+            required={true}
+            multiline
+            onChange={handleChangeIn("height")}
+            fullWidth
+            margin="normal"
+          />
+        </FormControl>
+
+        <FormControl className={classes.formControl}>
+          <FormLabel component="legend">Weight</FormLabel>
+
+          <TextField
+            id="weight"
+            value={profileInputs.weight}
+            label="lbs"
+            variant="outlined"
+            required={true}
+            onChange={handleChangeIn("weight")}
+            fullWidth
+            margin="normal"
+          />
+        </FormControl>
+      </div>
+      <div className={classes.inputGroup}>
+        <FormControl component="fieldset" className={classes.formControl}>
+          <FormLabel component="legend">Age</FormLabel>
+          <TextField
+            id="age"
+            value={profileInputs.age}
+            label="Enter"
+            variant="outlined"
+            required={true}
+            onChange={handleChangeIn("age")}
+            fullWidth
+            margin="normal"
+          />
+        </FormControl>
+      </div>
+      <FormControl component="fieldset" className={classes.formControl}>
+        <FormLabel component="legend">Gender</FormLabel>
+        <RadioGroup
+          aria-label="gender"
+          name="gender1"
+          value={profileInputs.gender}
+          onChange={handleChangeIn("gender")}
+        >
+          <FormControlLabel value="female" control={<Radio />} label="Female" />
+          <FormControlLabel value="male" control={<Radio />} label="Male" />
+          <FormControlLabel value="other" control={<Radio />} label="Other" />
+        </RadioGroup>
+      </FormControl>
+
+      <h3>Weekly Schedule</h3>
+      <CalendarForm
+        schedule={profileInputs.schedule}
+        setSchedule={schedule => handleScheduleIn(schedule)}
       />
-      <TextField
-        id="heightInches"
-        defaultValue={profileInputs.heightInches}
-        label="inches"
-        variant="outlined"
-        required={true}
-        onChange={handleChangeIn("heightInches")}
-        fullWidth
-        margin="normal"
-      />
-      <br></br>
-      <br></br>
-      Weight
-      <TextField
-        id="weight"
-        defaultValue={profileInputs.weight}
-        label="lbs"
-        variant="outlined"
-        required={true}
-        onChange={handleChangeIn("weight")}
-        fullWidth
-        margin="normal"
-      />
-      <br></br>
-      <br></br>
-      Age
-      <TextField
-        id="age"
-        defaultValue={profileInputs.age}
-        label=""
-        variant="outlined"
-        required={true}
-        onChange={handleChangeIn("age")}
-        fullWidth
-        margin="normal"
-      />
-      <br></br>
-      <br></br>
-      Gender
-      <form>
-        <div className="radio">
-          <label>
-            <input
-              type="radio"
-              value="male"
-              checked={profileInputs.gender === "male"}
-              onChange={handleChangeIn("gender")}
-            />
-            Male
-          </label>
-        </div>
-        <div className="radio">
-          <label>
-            <input
-              type="radio"
-              value="female"
-              checked={profileInputs.gender === "female"}
-              onChange={handleChangeIn("gender")}
-            />
-            Female
-          </label>
-        </div>
-        <div className="radio">
-          <label>
-            <input
-              type="radio"
-              value="other"
-              checked={profileInputs.gender === "other"}
-              onChange={handleChangeIn("gender")}
-            />
-            Prefer not to say
-          </label>
-        </div>
-      </form>
-      <br></br>
-      <br></br>
-      Schedule
-      <TextField
-        id="schedule"
-        defaultValue={profileInputs.schedule}
-        label=""
-        variant="outlined"
-        required={true}
-        onChange={handleChangeIn("schedule")}
-        fullWidth
-        margin="normal"
-      />
-      <br></br>
-      <br></br>
-      <Button variant="contained" id="submitButton" onClick={handleClick()}>
-        Submit Profile
+
+      <Button
+        className={classes.btn}
+        variant="contained"
+        color="primary"
+        onClick={handleSubmit}
+      >
+        Submit
       </Button>
-    </div>
+    </Container>
   );
 }
 
-export default Profile;
+export default BiometricForm;
