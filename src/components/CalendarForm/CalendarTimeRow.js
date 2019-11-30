@@ -14,6 +14,7 @@ function minutesToHHMM(mins) {
 function CalendarTimeRow(props) {
   const [isPreview, setIsPreview] = useState(false);
   const [time, setTime] = useState({ start: "0", end: "0" });
+  const [pos, setPos] = useState(0);
 
   const previewRef = useRef();
   const currRef = useRef();
@@ -44,13 +45,23 @@ function CalendarTimeRow(props) {
   }, []);
 
   return (
-    <div className={props.className} onClick={() => setIsPreview(true)} ref={currRef}>
+    <div
+      className={props.className}
+      onClick={e => {
+        setPos({
+          x: e.pageX,
+          y: e.pageY,
+        });
+        setIsPreview(true);
+      }}
+      ref={currRef}
+    >
       {isPreview ? (
         <NewTaskForm
           previewRef={previewRef}
           start={time.start}
           end={time.end}
-          pos={currRef.current.getBoundingClientRect()}
+          pos={pos}
           handleTimeChange={handleTimeChange}
           onSubmit={onSubmit}
         />

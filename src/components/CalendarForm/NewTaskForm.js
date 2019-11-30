@@ -11,7 +11,6 @@ function NewTaskForm(props) {
   const style = {
     position: "absolute",
     width: "25em",
-    top: "-3em",
     padding: "1em",
     borderRadius: "0.4em",
     boxShadow: "-3px 4px 28px rgba(0,0,0,0.5), 10px 4px 10px rgba(0,0,0,0.5)",
@@ -19,12 +18,8 @@ function NewTaskForm(props) {
     zIndex: "10",
   };
 
-  if (pos.x > 500) {
-    style.left = "-23em";
-  } else if (window.innerWidth - pos.x - pos.width > 500) {
-    style.right = "-23em";
-  } else {
-    style.top = "-15em";
+  if (pos.x > window.innerWidth / 2) {
+    style.left = "-26em";
   }
 
   return (
