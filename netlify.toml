@@ -2,3 +2,8 @@
   command = "npm run build && npm run build:lambda"
   functions = "./lambda"
   publish = "build"
+
+  [[redirects]]
+    from = "/*"
+    to = "/index.html"
+    status = 200
