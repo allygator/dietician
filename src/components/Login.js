@@ -24,8 +24,6 @@ function Login() {
     setSignin({ ...signinInputs, [name]: event.target.value });
   };
 
-  const handleClick = name => event => {};
-
   function signin(email, pass) {
     firebase.doSignInWithEmailAndPassword(email, pass).catch(error => {
       console.log(error);
@@ -52,6 +50,14 @@ function Login() {
       });
   }
 
+  function login(email, pass) {
+    if (newUser) {
+      signup(email, pass);
+    } else {
+      signin(email, pass);
+    }
+  }
+
   const fields = (
     <div>
       <div className="login_fields">
@@ -70,6 +76,7 @@ function Login() {
           id="password"
           defaultValue={signinInputs.password}
           label="Password"
+          type="password"
           variant="outlined"
           required={true}
           onChange={handleChangeIn("password")}
@@ -92,7 +99,7 @@ function Login() {
         <Button
           variant="contained"
           id="submitButton"
-          onClick={() => signin(signinInputs.email, signinInputs.password)}
+          onClick={() => login(signinInputs.email, signinInputs.password)}
         >
           Login
         </Button>
@@ -118,20 +125,3 @@ function Login() {
 }
 
 export default Login;
-
-// <div className="login">
-//   <div className="signin">
-//     {userData.authUser ? (
-//       <Redirect
-//         to={{
-//           pathname: "/calendar",
-//         }}
-//       />
-//     ) : (
-//       fields
-//     )}
-//   </div>
-// </div>
-// <div>
-// {fields}
-// </div>
