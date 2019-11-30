@@ -1,0 +1,122 @@
+* {
+  box-sizing: border-box;
+}
+
+.calendar {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  --border-color: black;
+}
+
+/* Nav area */
+/*============================ ROW 1 ==================================*/
+.calendar__nav__header {
+  width: 100%;
+  height: 3em;
+  padding: 0 1em;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/*============================ ROW 2 ==================================*/
+.calendar__day__header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  height: 4em;
+  background-color: white;
+  border-bottom: 1px solid var(--border-color);
+  z-index: 1;
+}
+
+.calendar__day__gap {
+  flex: 0 0 3em;
+  height: inherit;
+  border-right: 1px solid var(--border-color);
+}
+
+.calendar__day__column {
+  position: relative;
+  flex: 1 1 auto;
+  height: inherit;
+  border-right: 1px solid var(--border-color);
+  display: flex;
+}
+
+.calendar__day__column:last-child {
+  border-right: none;
+}
+
+.calendar__day__column--today {
+  color: blue;
+}
+
+.calendar__day__column > span:first-child {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4em;
+  height: 4em;
+  line-height: 4em;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.calendar__day__column > span:last-child {
+  width: 100%;
+  height: inherit;
+  text-align: center;
+  line-height: 4em;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+/*============================ ROW 3 ==================================*/
+.calendar__time__container {
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.calendar__time__column:first-child {
+  flex: 0 0 3em;
+}
+
+.calendar__time__column {
+  position: relative;
+  flex: 1 1 auto;
+  height: 100%;
+  border-right: 1px solid var(--border-color);
+}
+
+.calendar__time__column:last-child {
+  border-right: none;
+}
+
+/* the gap column for hours */
+.calendar__time__column:first-child > .calendar__time__row {
+  line-height: 4em;
+  text-align: right;
+  padding-right: 0.5em;
+}
+
+.calendar__time__row {
+  position: relative;
+  height: 4em;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.calendar__time__row > span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  border-bottom: 1px dotted var(--border-color);
+}
