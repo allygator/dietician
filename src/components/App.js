@@ -34,7 +34,7 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/profile" component={Profile} />
           <Route path="/calendar-choices" component={CalendarChoices} />
-          <Route path="/calendar" component={Calendar} /
+          <Route path="/calendar" component={Calendar} />
         </Switch>
       </UserContext.Provider>
     </Router>
