@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -16,11 +16,13 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
-import StarIcon from "@material-ui/icons/Star";
-import SearchIcon from "@material-ui/icons/Search";
+// import StarIcon from "@material-ui/icons/Star";
+// import SearchIcon from "@material-ui/icons/Search";
+import { useHistory } from "react-router-dom";
 
 import Calendar from "./Calendar";
 import Profile from "./Profile";
+import { FirebaseContext } from "./Context/Firebase";
 
 const drawerWidth = 240;
 
@@ -108,9 +110,19 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Dashboard() {
+export default function Dashboard(props) {
+  const firebase = useContext(FirebaseContext);
+  const history = useHistory();
+  function signout() {
+    firebase.doSignOut();
+    history.push("/", { new: true });
+  }
   const [open, setOpen] = useState(true);
   const [currPage, setCurrPage] = useState("Calendar");
+  // if (props.location.state && props.location.state.new && currPage !== "Profile") {
+  //   setCurrPage("Profile");
+  // }
+  // console.log(props);
 
   const classes = useStyles();
   const handleDrawerOpen = () => {
@@ -167,18 +179,6 @@ export default function Dashboard() {
           </ListItemIcon>
           <ListItemText primary="Calendar" />
         </ListItem>
-        <ListItem button onClick={() => setCurrPage("Recommendation")}>
-          <ListItemIcon>
-            <StarIcon />
-          </ListItemIcon>
-          <ListItemText primary="Recommendation" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <SearchIcon />
-          </ListItemIcon>
-          <ListItemText primary="Look Up" />
-        </ListItem>
         <ListItem button onClick={() => setCurrPage("Profile")}>
           <ListItemIcon>
             <AccountBoxIcon />
@@ -187,6 +187,12 @@ export default function Dashboard() {
         </ListItem>
 
         <Divider />
+        <ListItem button onClick={signout}>
+          <ListItemIcon>
+            <AccountBoxIcon />
+          </ListItemIcon>
+          <ListItemText primary="Logout" />
+        </ListItem>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
@@ -211,3 +217,16 @@ export default function Dashboard() {
     </div>
   );
 }
+
+// <ListItem button onClick={() => setCurrPage("Recommendation")}>
+//   <ListItemIcon>
+//     <StarIcon />
+//   </ListItemIcon>
+//   <ListItemText primary="Recommendation" />
+// </ListItem>
+// <ListItem button>
+//   <ListItemIcon>
+//     <SearchIcon />
+//   </ListItemIcon>
+//   <ListItemText primary="Look Up" />
+// </ListItem>

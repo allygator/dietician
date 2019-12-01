@@ -251,3 +251,40 @@ a {
 .home #react img {
     transform: scale(1.5);
 }
+
+.login header {
+    height: 10vh;
+    padding: 0 10px;
+    background: linear-gradient(150deg, var(--bright-blue) 10%, var(--purple) 100%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.login header .MuiButton-outlinedPrimary {
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.signin>div {
+    width: 60%;
+    margin: auto;
+    margin-top: 20vh;
+}
+
+.signin #error {
+    color: red;
+    font-weight: bold;
+}
+
+.login_fields {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login_fields button {
+    align-self: flex-end;
+}

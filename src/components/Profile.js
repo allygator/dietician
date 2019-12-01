@@ -8,6 +8,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import Button from "@material-ui/core/Button";
+// import { useHistory } from "react-router-dom";
 
 import CalendarChoices from "./CalendarChoices";
 import CalendarForm from "./CalendarForm/CalendarForm";
@@ -42,6 +43,7 @@ const useStyles = makeStyles(theme => ({
 function Profile(props) {
   const firebase = useContext(FirebaseContext);
   const userData = useContext(UserContext);
+  // let history = useHistory();
 
   const [error, setError] = useState("");
   const [profileInputs, setProfile] = useState({
@@ -97,7 +99,7 @@ function Profile(props) {
       return day;
     });
 
-    fetch("http://localhost:34567/.netlify/functions/schedule", {
+    fetch("/.netlify/functions/schedule", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -143,6 +145,7 @@ function Profile(props) {
       })
       .then(() => {
         // Success: do something here
+        // history.push("/dashboard");
         console.log("success");
       })
       .catch(err => {
