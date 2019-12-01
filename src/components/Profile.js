@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
@@ -10,6 +10,8 @@ import FormLabel from "@material-ui/core/FormLabel";
 import Button from "@material-ui/core/Button";
 
 import CalendarForm from "./CalendarForm/CalendarForm";
+import UserContext from "./Context/UserContext";
+import { FirebaseContext } from "./Context/Firebase";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -32,11 +34,15 @@ const useStyles = makeStyles(theme => ({
     fontSize: "0.9rem",
   },
   btn: {
-    margin: "3rem 0",
+    marginTop: "3rem",
   },
 }));
 
-function BiometricForm() {
+function Profile(props) {
+  const firebase = useContext(FirebaseContext);
+  const userData = useContext(UserContext);
+
+  const [error, setError] = useState("e222");
   const [profileInputs, setProfile] = useState({
     firstName: "",
     lastName: "",
@@ -44,12 +50,14 @@ function BiometricForm() {
     weight: "",
     age: "",
     gender: "",
-    selectedOption: "",
     schedule: [[], [], [], [], [], [], []],
   });
 
   const classes = useStyles();
 
+  useEffect(() => {
+    setError("");
+  }, [profileInputs]);
   const handleChangeIn = name => event => {
     setProfile({ ...profileInputs, [name]: event.target.value });
   };
@@ -59,8 +67,34 @@ function BiometricForm() {
   };
 
   const handleSubmit = () => {
-    // Code for submit here
-    console.log(profileInputs);
+    const { firstName, lastName, height, weight, age, gender } = profileInputs;
+
+    if (!firstName || !lastName || !height || !weight || !age || !gender) {
+      setError("Please enter all require fields");
+      return;
+    }
+
+    const busySchedule = {};
+    profileInputs.schedule.forEach((daily, index) => {
+      const day = {};
+      daily.forEach((task, i) => {
+        day[i * 2] = task.start;
+        day[i * 2 + 1] = task.end;
+      });
+      busySchedule[index] = day;
+    });
+
+    firebase.db
+      .collection("users")
+      .doc(userData.authUser.uid)
+      .set({ firstName, lastName, height, age: parseInt(age), gender, busySchedule })
+      .then(() => {
+        // Success: do something here
+        console.log("success");
+      })
+      .catch(err => {
+        console.log("err", err);
+      });
   };
 
   return (
@@ -168,8 +202,9 @@ function BiometricForm() {
       >
         Submit
       </Button>
+      {error ? <p>{error}</p> : null}
     </Container>
   );
 }
 
-export default BiometricForm;
+export default Profile;

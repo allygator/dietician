@@ -5,8 +5,17 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 
+const day = {
+  0: "Sunday",
+  1: "Monday  ",
+  2: "Tuesday",
+  3: "Wednesday",
+  4: "Thrusday",
+  5: "Friday",
+  6: "Saturday",
+};
 function NewTaskForm(props) {
-  const { start, end, pos } = props;
+  const { start, end } = props;
 
   const style = {
     position: "absolute",
@@ -18,13 +27,20 @@ function NewTaskForm(props) {
     zIndex: "10",
   };
 
-  if (pos.x > window.innerWidth / 2) {
+  if (props.row >= 3) {
     style.left = "-26em";
+  } else {
+    style.right = "-26em";
+  }
+
+  if (props.col >= 20) {
+    style.top = "-20em";
   }
 
   return (
     <Card ref={props.previewRef} style={style}>
       <CardContent>
+        <p style={{ fontSize: "1.1rem" }}>Day: {day[props.row]}</p>
         <TextField
           id="heightFeet"
           label="Title"

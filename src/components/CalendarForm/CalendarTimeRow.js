@@ -12,7 +12,7 @@ function minutesToHHMM(mins) {
 }
 
 function CalendarTimeRow(props) {
-  const [isPreview, setIsPreview] = useState(false);
+  const [isPreviewing, setIsPreviewing] = useState(false);
   const [time, setTime] = useState({ start: "0", end: "0" });
   const [pos, setPos] = useState(0);
 
@@ -26,6 +26,7 @@ function CalendarTimeRow(props) {
 
   const onSubmit = () => {
     props.handleAddingTask(props.index, time);
+    setIsPreviewing(false);
   };
 
   useEffect(() => {
@@ -39,7 +40,7 @@ function CalendarTimeRow(props) {
     document.addEventListener("mousedown", e => {
       // Click outside of preview box
       if (previewRef.current && !previewRef.current.contains(e.target)) {
-        setIsPreview(false);
+        setIsPreviewing(false);
       }
     });
   }, []);
@@ -52,11 +53,11 @@ function CalendarTimeRow(props) {
           x: e.pageX,
           y: e.pageY,
         });
-        setIsPreview(true);
+        setIsPreviewing(true);
       }}
       ref={currRef}
     >
-      {isPreview ? (
+      {isPreviewing ? (
         <NewTaskForm
           previewRef={previewRef}
           start={time.start}
@@ -64,6 +65,8 @@ function CalendarTimeRow(props) {
           pos={pos}
           handleTimeChange={handleTimeChange}
           onSubmit={onSubmit}
+          row={props.index}
+          col={props.start}
         />
       ) : null}
     </div>
