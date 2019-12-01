@@ -64,9 +64,7 @@ function EventReview(props) {
         <Typography gutterBottom component="p">
           {`${minutesToHHMM(start)} - ${minutesToHHMM(end)}`}
         </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          Hello the world. Just do something.... What... Exercise is good for your health
-        </Typography>
+        <Typography variant="body2" color="textSecondary" component="p"></Typography>
         <Typography>
           <ul
             className={`${
