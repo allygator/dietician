@@ -28,100 +28,59 @@ const useStyles = makeStyles(theme => ({
 const DAYS = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
 const HOURS = fillHours();
 
-const sampleTask = {
-  wake: 390,
-  sleep: 1320,
-  mealDuration: 30,
-  mealBuffer: 15,
-  exerciseDuration: 60,
-  exerciseBuffer: 15,
-  possibleSchedule: [
-    [
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [390, 690, 1035],
-        exercise: [495],
-      },
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [435, 690, 1035],
-        exercise: [1235],
-      },
-    ],
-    [
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [390, 690, 1035],
-        exercise: [495],
-      },
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [435, 690, 1035],
-        exercise: [1235],
-      },
-    ],
-    [
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [390, 690, 1035],
-        exercise: [495],
-      },
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [435, 690, 1035],
-        exercise: [1235],
-      },
-    ],
-    [
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [390, 690, 1035],
-        exercise: [495],
-      },
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [435, 690, 1035],
-        exercise: [1235],
-      },
-    ],
-    [
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [390, 690, 1035],
-        exercise: [495],
-      },
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [435, 690, 1035],
-        exercise: [1235],
-      },
-    ],
-    [
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [390, 690, 1035],
-        exercise: [495],
-      },
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [435, 690, 1035],
-        exercise: [1235],
-      },
-    ],
-    [
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [390, 690, 1035],
-        exercise: [495],
-      },
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [435, 690, 1035],
-        exercise: [1235],
-      },
-    ],
-  ],
-};
+// const sampleTask = [
+//   {
+//     meals: [{ start: 405, end: 420 }, { start: 660, end: 675 }, { start: 915, end: 930 }],
+//     exercise: [{ start: 315, end: 345 }],
+//     busy: [{ start: 240, end: 300 }],
+//   },
+//   {
+//     meals: [
+//       { start: 585, end: 600 },
+//       { start: 840, end: 855 },
+//       { start: 1095, end: 1110 },
+//     ],
+//     exercise: [{ start: 495, end: 525 }],
+//     busy: [{ start: 420, end: 480 }],
+//   },
+//   {
+//     meals: [{ start: 345, end: 360 }, { start: 600, end: 615 }, { start: 855, end: 870 }],
+//     exercise: [{ start: 255, end: 285 }],
+//     busy: [{ start: 180, end: 240 }],
+//   },
+//   {
+//     meals: [
+//       { start: 480, end: 495 },
+//       { start: 735, end: 750 },
+//       { start: 990, end: 1005 },
+//     ],
+//     exercise: [{ start: 390, end: 420 }],
+//     busy: [{ start: 840, end: 900 }],
+//   },
+//   {
+//     meals: [{ start: 465, end: 480 }, { start: 720, end: 735 }, { start: 975, end: 990 }],
+//     exercise: [{ start: 375, end: 405 }],
+//     busy: [{ start: 300, end: 360 }],
+//   },
+//   {
+//     meals: [
+//       { start: 585, end: 600 },
+//       { start: 840, end: 855 },
+//       { start: 1095, end: 1110 },
+//     ],
+//     exercise: [{ start: 495, end: 525 }],
+//     busy: [{ start: 420, end: 480 }],
+//   },
+//   {
+//     meals: [
+//       { start: 480, end: 495 },
+//       { start: 735, end: 750 },
+//       { start: 990, end: 1005 },
+//     ],
+//     exercise: [{ start: 390, end: 420 }],
+//     busy: [],
+//   },
+// ];
 
 export default function Calendar(props) {
   const classes = useStyles();
@@ -134,23 +93,24 @@ export default function Calendar(props) {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    if (props.tasks) setTasks(props.tasks);
-
-    // Are we logged in
-    if (userData.authUser) {
-      firebase.db
-        .collection("users")
-        .doc(userData.authUser.uid)
-        .get()
-        .then(x => {
-          const { fullSchedule = sampleTask } = x.data();
-          if (fullSchedule) {
-            const possibleSchedules = formatTask(fullSchedule);
-            setTasks(possibleSchedules[0]);
-          }
-          setIsLoading(false);
-        })
-        .catch(err => console.log("err", err));
+    if (props.tasks) {
+      setTasks(props.tasks);
+      setIsLoading(false);
+    } else {
+      // Are we logged in
+      if (userData.authUser) {
+        firebase.db
+          .collection("users")
+          .doc(userData.authUser.uid)
+          .get()
+          .then(doc => {
+            // const { fullSchedule = sampleTask } = x.data();
+            const { fullSchedule = [] } = doc.data();
+            setTasks(fullSchedule);
+          })
+          .catch(err => console.log("err", err))
+          .finally(() => setIsLoading(false));
+      }
     }
   }, [props.tasks, firebase.db, userData.authUser]);
 
@@ -358,37 +318,4 @@ function fillHours() {
       hours.push({ time: i, timeString: `${i}${j === 0 ? "a" : "p"}` });
   }
   return hours;
-}
-
-function formatTask(sampleTask) {
-  return [
-    sampleTask.possibleSchedule.map(day => [
-      {
-        meals: day[0].meals.map(meal => ({ start: meal, end: meal + 15 })),
-        exercise: day[0].exercise.map(exercise => ({
-          start: exercise,
-          end: exercise + 30,
-        })),
-        busy: day[0].busy
-          .map((element, index) =>
-            index % 2 === 0 ? { start: element, end: day[0].busy[index + 1] } : 0
-          )
-          .filter(time => time !== 0),
-      },
-    ]),
-    sampleTask.possibleSchedule.map(day => [
-      {
-        meals: day[1].meals.map(meal => ({ start: meal, end: meal + 15 })),
-        exercise: day[1].exercise.map(exercise => ({
-          start: exercise,
-          end: exercise + 30,
-        })),
-        busy: day[1].busy
-          .map((element, index) =>
-            index % 2 === 0 ? { start: element, end: day[1].busy[index + 1] } : 0
-          )
-          .filter(time => time !== 0),
-      },
-    ]),
-  ];
 }
