@@ -172,6 +172,15 @@ a {
         height:760px;
         height: calc(190px * 4)
     }
+    #intro h1 {
+        margin-top: -80px;
+    }
+    #intro h2 {
+        margin-bottom: 0;
+    }
+    #intro p {
+        padding-bottom: 20px;
+    }
 }
 
 #intro .container-lg {
@@ -198,7 +207,7 @@ a {
 }
 
 .home section:nth-child(2) {
-    margin-top: -20vh;
+    margin-top: -21vh;
     padding-top: 20vh;
     /* height: 40vh; */
     background-color: #292d3e;
