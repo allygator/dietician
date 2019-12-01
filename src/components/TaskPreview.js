@@ -125,10 +125,42 @@ function EventReview(props) {
                 food === "Smoked Salmon Bagel" ? "show-detail" : "hide-detail"
               }`}
             >
-              <li>Whole-Wheat Bagel</li>
-              <li>Cream Cheese</li>
-              <li>Smoked Salmon </li>
-              <li>Alfalfa Sprouts</li>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 339638,
+                  name: "Whole-Wheat Bagel",
+                }}
+              >
+                <li>Whole-Wheat Bagel</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 173418,
+                  name: "Cream Cheese",
+                }}
+              >
+                <li>Cream Cheese</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 538283,
+                  name: "Smoked Salmon ",
+                }}
+              >
+                <li>Smoked Salmon </li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 342592,
+                  name: "Alfalfa Sprouts",
+                }}
+              >
+                <li>Alfalfa Sprouts</li>
+              </Link>
             </ul>
             <ul
               className={`${

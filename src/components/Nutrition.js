@@ -106,7 +106,15 @@ function Nutrition(props) {
         : props.location.id === 336750
         ? nutritionLabel(81, 10.45, 2.27, 4.76, 81.24, 4, 0)
         : props.location.id === 562115
-        ? nutritionLabel(167, 0, 15, 10, 1, 6.7, 6.7)
+        ? nutritionLabel(167, 0, 15, 10, "?", 6.7, 6.7)
+        : props.location.id === 339638
+        ? nutritionLabel(250, 10.2, 1.53, 48.89, 37.55, 6.12, 4.1)
+        : props.location.id === 173418
+        ? nutritionLabel(350, 6.15, 34.44, 5.52, 52.62, 3.76, 0)
+        : props.location.id === 538283
+        ? nutritionLabel(127, 21.82, 1.82, 3.64, "?", 0, 1.8)
+        : props.location.id === 342592
+        ? nutritionLabel(23, 3.99, 0.69, 2.1, 92.82, 0.2, 1.9)
         : ""}
     </div>
   );
