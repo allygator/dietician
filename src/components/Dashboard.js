@@ -92,6 +92,11 @@ const useStyles = makeStyles(theme => ({
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
   },
+  calendarContainer: {
+    height: "calc(100vh - 64px)",
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
+  },
   paper: {
     padding: theme.spacing(2),
     display: "flex",
@@ -185,7 +190,12 @@ export default function Dashboard() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth="xl" className={classes.container}>
+        <Container
+          maxWidth="xl"
+          className={
+            currPage === "Calendar" ? classes.calendarContainer : classes.container
+          }
+        >
           {(() => {
             switch (currPage) {
               case "Calendar":
