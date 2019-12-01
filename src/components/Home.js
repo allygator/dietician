@@ -49,6 +49,7 @@ function App() {
           <h2>
             Built by Alyssa Davis, Jose Perez, Toan Vu, Weining Li, and Charles Stephens
           </h2>
+          <h3>Developed for UCF's COP4331 taught by Dr. Damla Turgut</h3>
         </div>
       </section>
       <section>
