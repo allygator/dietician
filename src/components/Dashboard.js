@@ -207,7 +207,7 @@ export default function Dashboard(props) {
               case "Calendar":
                 return <Calendar />;
               case "Profile":
-                return <Profile />;
+                return <Profile directToCalendar={() => setCurrPage("Calendar")} />;
               default:
                 return null;
             }
