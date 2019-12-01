@@ -192,6 +192,7 @@ export default function Calendar(props) {
                 {tasks[index] && tasks[index].meals
                   ? tasks[index].meals.map((block, index) => (
                       <TaskBlock
+                        time={index}
                         key={index}
                         type="Food"
                         start={block.start}

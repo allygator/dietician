@@ -35,6 +35,7 @@ function TaskBlock(props) {
       <strong>{type}</strong>
       {isPreview ? (
         <TaskPreview
+          time={props.time}
           previewRef={previewRef}
           title={type}
           start={start}

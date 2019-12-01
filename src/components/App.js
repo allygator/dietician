@@ -9,6 +9,7 @@ import UserContext from "./Context/UserContext";
 import { FirebaseContext } from "./Context/Firebase";
 import CalendarChoices from "./CalendarChoices";
 import Dashboard from "./Dashboard";
+import Nutrition from "./Nutrition";
 
 function App() {
   //Add additional routes here following the login route example
@@ -37,6 +38,7 @@ function App() {
           <Route path="/profile" component={Profile} />
           <Route path="/calendar-choices" component={CalendarChoices} />
           <Route path="/calendar" component={Calendar} />
+          <Route path="/nutrition" component={Nutrition} />
         </Switch>
       </UserContext.Provider>
     </Router>
