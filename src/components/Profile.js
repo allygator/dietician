@@ -42,7 +42,7 @@ function Profile(props) {
   const firebase = useContext(FirebaseContext);
   const userData = useContext(UserContext);
 
-  const [error, setError] = useState("e222");
+  const [error, setError] = useState("");
   const [profileInputs, setProfile] = useState({
     firstName: "",
     lastName: "",
@@ -58,6 +58,7 @@ function Profile(props) {
   useEffect(() => {
     setError("");
   }, [profileInputs]);
+
   const handleChangeIn = name => event => {
     setProfile({ ...profileInputs, [name]: event.target.value });
   };
