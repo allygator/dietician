@@ -4,6 +4,9 @@ import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
+
+import "./TaskPreview.css";
 
 import "./TaskPreview.css";
 
@@ -90,19 +93,76 @@ function EventReview(props) {
                 food === "Cottage Cheese Toast" ? "show-detail" : "hide-detail"
               }`}
             >
-              <li>Sprouted Toast</li>
-              <li>Cottage Cheese</li>
-              <li>Avocado</li>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 339622,
+                  name: "Sprouted Toast",
+                }}
+              >
+                <li>Sprouted Toast</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 336750,
+                  name: "Cottage Cheese",
+                }}
+              >
+                <li>Cottage Cheese</li>
+              </Link>
+
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 562115,
+                  name: "Avocado",
+                }}
+              >
+                <li>Avocado</li>
+              </Link>
             </ul>
             <ul
               className={`${
                 food === "Smoked Salmon Bagel" ? "show-detail" : "hide-detail"
               }`}
             >
-              <li>Whole-Wheat Bagel</li>
-              <li>Cream Cheese</li>
-              <li>Smoked Salmon </li>
-              <li>Alfalfa Sprouts</li>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 339638,
+                  name: "Whole-Wheat Bagel",
+                }}
+              >
+                <li>Whole-Wheat Bagel</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 173418,
+                  name: "Cream Cheese",
+                }}
+              >
+                <li>Cream Cheese</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 538283,
+                  name: "Smoked Salmon ",
+                }}
+              >
+                <li>Smoked Salmon </li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 342592,
+                  name: "Alfalfa Sprouts",
+                }}
+              >
+                <li>Alfalfa Sprouts</li>
+              </Link>
             </ul>
             <ul
               className={`${

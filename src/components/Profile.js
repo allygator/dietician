@@ -53,6 +53,7 @@ function Profile(props) {
     weight: "",
     age: "",
     gender: "",
+    training: "",
     schedule: [[], [], [], [], [], [], []],
   });
   const [submitted, setSubmitted] = useState(false);
@@ -114,18 +115,6 @@ function Profile(props) {
       .catch(err => {
         console.log(err);
       });
-
-    // firebase.db
-    //   .collection("users")
-    //   .doc(userData.authUser.uid)
-    //   .set({ firstName, lastName, height, age: parseInt(age), gender, busySchedule })
-    //   .then(() => {
-    //     // Success: do something here
-    //     console.log("success");
-    //   })
-    //   .catch(err => {
-    //     console.log("err", err);
-    //   });
   };
 
   const handleSecondForm = schedule => {
@@ -238,19 +227,35 @@ function Profile(props) {
           />
         </FormControl>
       </div>
-      <FormControl component="fieldset" className={classes.formControl}>
-        <FormLabel component="legend">Gender</FormLabel>
-        <RadioGroup
-          aria-label="gender"
-          name="gender1"
-          value={profileInputs.gender}
-          onChange={handleChangeIn("gender")}
-        >
-          <FormControlLabel value="female" control={<Radio />} label="Female" />
-          <FormControlLabel value="male" control={<Radio />} label="Male" />
-          <FormControlLabel value="other" control={<Radio />} label="Other" />
-        </RadioGroup>
-      </FormControl>
+
+      <div className={classes.inputGroup}>
+        <FormControl component="fieldset" className={classes.formControl}>
+          <FormLabel component="legend">Gender</FormLabel>
+          <RadioGroup
+            aria-label="gender"
+            name="gender1"
+            value={profileInputs.gender}
+            onChange={handleChangeIn("gender")}
+          >
+            <FormControlLabel value="female" control={<Radio />} label="Female" />
+            <FormControlLabel value="male" control={<Radio />} label="Male" />
+            <FormControlLabel value="other" control={<Radio />} label="Other" />
+          </RadioGroup>
+        </FormControl>
+
+        <FormControl component="fieldset" className={classes.formControl}>
+          <FormLabel component="legend">Training</FormLabel>
+          <RadioGroup
+            aria-label="training"
+            name="training"
+            value={profileInputs.training}
+            onChange={handleChangeIn("training")}
+          >
+            <FormControlLabel value="strength" control={<Radio />} label="Strength" />
+            <FormControlLabel value="cardio" control={<Radio />} label="Cardio" />
+          </RadioGroup>
+        </FormControl>
+      </div>
 
       <h3>Weekly Schedule</h3>
       <CalendarForm
