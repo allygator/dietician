@@ -22,10 +22,11 @@ function Nutrition(props) {
   //   }
   // }
 
-  const lul = (
+  const nutritionLabel = (calories, protein, fat, carbs, water, sugar, fiber) => (
     <div>
       <section class="performance-facts">
         <header class="performance-facts__header">
+          <h1>props.location.name</h1>
           <h1 class="performance-facts__title">Nutrition Facts</h1>
           <p>Serving Size 100 g</p>
         </header>
@@ -43,7 +44,7 @@ function Nutrition(props) {
                 <b>Calories </b>
               </th>
               <td>
-                <b> 200 kcal</b>
+                <b>{calories} kcal</b>
               </td>
             </tr>
             <tr>
@@ -51,29 +52,21 @@ function Nutrition(props) {
                 <b>Protein </b>
               </th>
               <td>
-                <b> 14.3g</b>
+                <b> {protein} g</b>
               </td>
             </tr>
             <tr>
               <td class="blank-cell"></td>
               <th>Total lipid (fat) </th>
               <td>
-                <b> 0g</b>
+                <b> {fat} g</b>
               </td>
             </tr>
             <tr>
               <td class="blank-cell"></td>
               <th>Carbohydrate, by difference </th>
               <td>
-                <b> 36.82g</b>
-              </td>
-            </tr>
-            <tr>
-              <th colspan="2">
-                <b>Alcohol, ethyl</b>
-              </th>
-              <td>
-                <b> 0g</b>
+                <b> {carbs} g</b>
               </td>
             </tr>
             <tr>
@@ -81,7 +74,7 @@ function Nutrition(props) {
                 <b>Water</b>
               </th>
               <td>
-                <b>46.61g</b>
+                <b>{water} g</b>
               </td>
             </tr>
             <tr>
@@ -89,14 +82,14 @@ function Nutrition(props) {
                 <b>Sugars</b>
               </th>
               <td>
-                <b>2.86g</b>
+                <b>{sugar} g</b>
               </td>
             </tr>
             <tr>
               <td class="blank-cell"></td>
               <th>Dietary Fiber</th>
               <td>
-                <b>5.7g</b>
+                <b>{fiber} g</b>
               </td>
             </tr>
           </tbody>
@@ -105,7 +98,17 @@ function Nutrition(props) {
     </div>
   );
 
-  return <div>{lul}</div>;
+  return (
+    <div>
+      {props.location.id === 339622
+        ? nutritionLabel(205, 14.3, 0, 36.82, 46.61, 2.86, 5.7)
+        : props.location.id === 336750
+        ? nutritionLabel(81, 10.45, 2.27, 4.76, 81.24, 4, 0)
+        : props.location.id === 336750
+        ? nutritionLabel(167, 0, 15, 10, 1, 6.7, 6.7)
+        : ""}
+    </div>
+  );
 }
 
 export default Nutrition;

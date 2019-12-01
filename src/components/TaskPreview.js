@@ -4,6 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
 
 import "./TaskPreview.css";
 
@@ -90,9 +91,34 @@ function EventReview(props) {
                 food === "Cottage Cheese Toast" ? "show-detail" : "hide-detail"
               }`}
             >
-              <li>Sprouted Toast</li>
-              <li>Cottage Cheese</li>
-              <li>Avocado</li>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 339622,
+                  name: "Sprouted Toast",
+                }}
+              >
+                <li>Sprouted Toast</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 336750,
+                  name: "Sprouted Toast",
+                }}
+              >
+                <li>Cottage Cheese</li>
+              </Link>
+
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 562115,
+                  name: "Sprouted Toast",
+                }}
+              >
+                <li>Avocado</li>
+              </Link>
             </ul>
             <ul
               className={`${
