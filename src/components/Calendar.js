@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import TaskBlock from "./TaskBlock";
+import CalendarTimeRow from "./CalendarForm/CalendarTimeRow";
 
 import "./Calendar.css";
 
@@ -56,14 +57,29 @@ export default function Calendar(props) {
             className="calendar__time__column"
             style={{ flex: `0 0 calc((100% - 3rem) / ${weekDays.length})` }}
           >
-            {HOURS.map((x, index) => (
-              <div key={index} className="calendar__time__row">
-                <span />
-              </div>
-            ))}
+            {HOURS.map((x, i) => {
+              if (props.editable) {
+                return (
+                  <CalendarTimeRow
+                    key={i}
+                    className="calendar__time__row"
+                    start={i}
+                    end={i + 1}
+                    index={index}
+                    handleAddingTask={props.handleAddingTask}
+                  />
+                );
+              } else {
+                return (
+                  <div key={i} className="calendar__time__row">
+                    <span />
+                  </div>
+                );
+              }
+            })}
 
-            {tasks[index]
-              ? tasks[index][0].meals.map((block, index) => (
+            {tasks[index] && tasks[index].meals
+              ? tasks[index].meals.map((block, index) => (
                   <TaskBlock
                     key={index}
                     type="Food"
@@ -72,8 +88,8 @@ export default function Calendar(props) {
                   />
                 ))
               : null}
-            {tasks[index]
-              ? tasks[index][0].exercise.map((block, index) => (
+            {tasks[index] && tasks[index].exercise
+              ? tasks[index].exercise.map((block, index) => (
                   <TaskBlock
                     key={index}
                     type="Exercise"
@@ -82,8 +98,8 @@ export default function Calendar(props) {
                   />
                 ))
               : null}
-            {tasks[index]
-              ? tasks[index][0].busy.map((block, index) => (
+            {tasks[index] && tasks[index].busy
+              ? tasks[index].busy.map((block, index) => (
                   <TaskBlock
                     key={index}
                     type="Work"
