@@ -9,28 +9,33 @@ const generateSchedule = (
 ) => {
   const possibleSchedule = [];
   busyTimesArray.forEach(busyTimes => {
-    const feedingSchedule = generateFeedingSchedule(
-      busyTimes,
-      wakeTime,
-      sleepTime,
-      mealBuffer,
-      mealDuration
-    );
-    const combinedSchedule = generateExerciseSchedule(
-      busyTimes,
-      feedingSchedule,
-      exerciseBuffer,
-      exerciseDuration,
-      mealBuffer,
-      mealDuration
-    );
-    if (combinedSchedule.length > 2) {
-      possibleSchedule.push([
-        combinedSchedule[0],
-        combinedSchedule[combinedSchedule.length - 1],
-      ]);
-    } else {
-      possibleSchedule.push(combinedSchedule);
+    if (
+      busyTimes.length === 0 ||
+      busyTimes.reduce((memo, item) => memo && item >= memo && item)
+    ) {
+      const feedingSchedule = generateFeedingSchedule(
+        busyTimes,
+        wakeTime,
+        sleepTime,
+        mealBuffer,
+        mealDuration
+      );
+      const combinedSchedule = generateExerciseSchedule(
+        busyTimes,
+        feedingSchedule,
+        exerciseBuffer,
+        exerciseDuration,
+        mealBuffer,
+        mealDuration
+      );
+      if (combinedSchedule.length > 2) {
+        possibleSchedule.push([
+          combinedSchedule[0],
+          combinedSchedule[combinedSchedule.length - 1],
+        ]);
+      } else {
+        possibleSchedule.push(combinedSchedule);
+      }
     }
   });
 
@@ -122,13 +127,7 @@ const generateExerciseSchedule = (
   return schedule;
 };
 
-const generateFeedingSchedule = (
-  busyTimes,
-  wakeTime = 390,
-  sleepTime = 1320,
-  buffer = 15,
-  duration = 30
-) => {
+const generateFeedingSchedule = (busyTimes, wakeTime, sleepTime, buffer, duration) => {
   const freeTime = [];
   busyTimes.unshift(wakeTime);
   busyTimes.push(sleepTime);
@@ -247,4 +246,5 @@ exports.handler = function(event, context, callback) {
       retVal,
     }),
   });
+  return retVal;
 };
