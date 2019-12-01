@@ -6,20 +6,29 @@
   position: relative;
   width: 100%;
   height: 100%;
-  --border-color: black;
-  overflow: scroll;
+  --bg-color: #fafafa;
+  --border-color: rgba(0, 0, 0, 0.12);
+  --active-color: #3f51b5;
+  --text-color: rgba(0, 0, 0, 0.87);
+  overflow: auto;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Loading */
+.calendar__loading__wrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Nav area */
 /*============================ ROW 1 ==================================*/
 .calendar__nav__header {
   width: 100%;
-  height: 3em;
-  padding: 0 1em;
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  border-bottom: 1px solid var(--border-color);
 }
 
 /*============================ ROW 2 ==================================*/
@@ -28,14 +37,17 @@
   top: 0;
   display: flex;
   height: 4em;
-  background-color: white;
+  background-color: transparent;
+  border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
   z-index: 1;
+  background-color: var(--bg-color);
 }
 
 .calendar__day__gap {
   flex: 0 0 3em;
   height: inherit;
+  border-left: 1px solid var(--border-color);
   border-right: 1px solid var(--border-color);
 }
 
@@ -45,14 +57,11 @@
   height: inherit;
   border-right: 1px solid var(--border-color);
   display: flex;
-}
-
-.calendar__day__column:last-child {
-  border-right: none;
+  color: var(--text-color);
 }
 
 .calendar__day__column--today {
-  color: blue;
+  color: var(--active-color);
 }
 
 .calendar__day__column > span:first-child {
@@ -96,21 +105,23 @@
   border-right: 1px solid var(--border-color);
 }
 
-.calendar__time__column:last-child {
-  border-right: none;
-}
-
 /* the gap column for hours */
 .calendar__time__column:first-child > .calendar__time__row {
   line-height: 4em;
   text-align: right;
   padding-right: 0.5em;
+  border-left: 1px solid var(--border-color);
 }
 
 .calendar__time__row {
   position: relative;
   height: 4em;
   border-bottom: 1px solid var(--border-color);
+  color: var(--text-color);
+}
+
+.calendar__time__row:last-child {
+  border-bottom: none;
 }
 
 .calendar__time__row > span {
