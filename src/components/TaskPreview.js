@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 
 import "./TaskPreview.css";
 
+import "./TaskPreview.css";
+
 function minutesToHHMM(mins) {
   let h = Math.floor(mins / 60);
   let m = mins % 60;
