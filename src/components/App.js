@@ -8,6 +8,7 @@ import Profile from "./Profile";
 import UserContext from "./Context/UserContext";
 import { FirebaseContext } from "./Context/Firebase";
 import CalendarChoices from "./CalendarChoices";
+import Dashboard from "./Dashboard";
 
 function App() {
   //Add additional routes here following the login route example
@@ -31,6 +32,7 @@ function App() {
       <UserContext.Provider value={user}>
         <Switch>
           <Route path="/" exact component={Home} />
+          <Route path="/dashboard" component={Dashboard} />
           <Route path="/login" component={Login} />
           <Route path="/profile" component={Profile} />
           <Route path="/calendar-choices" component={CalendarChoices} />
