@@ -66,7 +66,7 @@ const generateExerciseSchedule = (
   }
 
   const restAfterEating = Math.min(60, 60 - exerciseBuffer);
-  const originalBusyTimes = busyTimes.slice(1, busyTime.length - 1);
+  const originalBusyTimes = busyTimes.slice(1, busyTimes.length - 1);
   const schedule = [];
   for (let h = 0; h < freeTime.length; h++) {
     for (let i = 0; i < feedingSchedule.length; i++) {

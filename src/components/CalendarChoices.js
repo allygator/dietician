@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -16,12 +16,19 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function CalendarChoices() {
+function CalendarChoices(props) {
   const [currTask, setCurrTask] = useState(0);
+  const [tasks, setTasks] = useState(null);
 
   const classes = useStyles();
 
-  const possibleSchedules = formatTask(sampleTask);
+  useEffect(() => {
+    if (props.response) setTasks({ ...props.response });
+  }, [props.response]);
+
+  console.log(tasks);
+
+  const possibleSchedules = formatTask(tasks);
 
   return (
     <div>
@@ -29,7 +36,11 @@ function CalendarChoices() {
         <Grid container spacing={6}>
           <Grid item xs></Grid>
           <Grid item xs={3}>
-            <Button variant="contained" color="primary">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => props.onSubmit([...possibleSchedules[currTask]])}
+            >
               Accept
             </Button>
           </Grid>
@@ -58,6 +69,7 @@ function CalendarChoices() {
 export default CalendarChoices;
 
 const formatTask = sampleTask => {
+  if (!sampleTask || !sampleTask.possibleSchedule) return [];
   return [
     sampleTask.possibleSchedule.map(day => ({
       meals: day[0].meals.map(meal => ({ start: meal, end: meal + 15 })),
@@ -84,99 +96,4 @@ const formatTask = sampleTask => {
         .filter(time => time !== 0),
     })),
   ];
-};
-
-const sampleTask = {
-  wake: 390,
-  sleep: 1320,
-  mealDuration: 30,
-  mealBuffer: 15,
-  exerciseDuration: 60,
-  exerciseBuffer: 15,
-  possibleSchedule: [
-    [
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [390, 690, 1035],
-        exercise: [495],
-      },
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [435, 690, 1035],
-        exercise: [1235],
-      },
-    ],
-    [
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [390, 690, 1035],
-        exercise: [495],
-      },
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [435, 690, 1035],
-        exercise: [1235],
-      },
-    ],
-    [
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [390, 690, 1035],
-        exercise: [495],
-      },
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [435, 690, 1035],
-        exercise: [1235],
-      },
-    ],
-    [
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [390, 690, 1035],
-        exercise: [495],
-      },
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [435, 690, 1035],
-        exercise: [1235],
-      },
-    ],
-    [
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [390, 690, 1035],
-        exercise: [495],
-      },
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [435, 690, 1035],
-        exercise: [1235],
-      },
-    ],
-    [
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [390, 690, 1035],
-        exercise: [495],
-      },
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [435, 690, 1035],
-        exercise: [1235],
-      },
-    ],
-    [
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [390, 690, 1035],
-        exercise: [495],
-      },
-      {
-        busy: [590, 660, 740, 1020, 1100, 1220],
-        meals: [435, 690, 1035],
-        exercise: [1235],
-      },
-    ],
-  ],
 };

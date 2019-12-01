@@ -9,6 +9,7 @@ import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import Button from "@material-ui/core/Button";
 
+import CalendarChoices from "./CalendarChoices";
 import CalendarForm from "./CalendarForm/CalendarForm";
 import UserContext from "./Context/UserContext";
 import { FirebaseContext } from "./Context/Firebase";
@@ -52,6 +53,8 @@ function Profile(props) {
     gender: "",
     schedule: [[], [], [], [], [], [], []],
   });
+  const [submitted, setSubmitted] = useState(false);
+  const [response, setResponse] = useState({});
 
   const classes = useStyles();
 
@@ -67,7 +70,7 @@ function Profile(props) {
     setProfile({ ...profileInputs, schedule: value });
   };
 
-  const handleSubmit = () => {
+  const handleFirstForm = () => {
     const { firstName, lastName, height, weight, age, gender } = profileInputs;
 
     if (!firstName || !lastName || !height || !weight || !age || !gender) {
@@ -85,10 +88,59 @@ function Profile(props) {
       busySchedule[index] = day;
     });
 
+    const formatedSchedule = profileInputs.schedule.map(daily => {
+      const day = [];
+      daily.forEach((task, i) => {
+        day.push(task.start);
+        day.push(task.end);
+      });
+      return day;
+    });
+
+    fetch("http://localhost:34567/.netlify/functions/schedule", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: JSON.stringify(formatedSchedule),
+    })
+      .then(result => result.json())
+      .then(res => {
+        setSubmitted(true);
+        setResponse(res.retVal);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    // firebase.db
+    //   .collection("users")
+    //   .doc(userData.authUser.uid)
+    //   .set({ firstName, lastName, height, age: parseInt(age), gender, busySchedule })
+    //   .then(() => {
+    //     // Success: do something here
+    //     console.log("success");
+    //   })
+    //   .catch(err => {
+    //     console.log("err", err);
+    //   });
+  };
+
+  const handleSecondForm = schedule => {
+    const { firstName, lastName, height, weight, age, gender } = profileInputs;
+
     firebase.db
       .collection("users")
       .doc(userData.authUser.uid)
-      .set({ firstName, lastName, height, age: parseInt(age), gender, busySchedule })
+      .set({
+        firstName,
+        lastName,
+        weight: parseInt(weight),
+        height,
+        age: parseInt(age),
+        gender,
+        fullSchedule: Object.assign({}, schedule),
+      })
       .then(() => {
         // Success: do something here
         console.log("success");
@@ -97,6 +149,14 @@ function Profile(props) {
         console.log("err", err);
       });
   };
+
+  if (submitted) {
+    return (
+      <Container maxWidth="lg">
+        <CalendarChoices response={response} onSubmit={handleSecondForm} />
+      </Container>
+    );
+  }
 
   return (
     <Container className={classes.root}>
@@ -199,7 +259,7 @@ function Profile(props) {
         className={classes.btn}
         variant="contained"
         color="primary"
-        onClick={handleSubmit}
+        onClick={handleFirstForm}
       >
         Submit
       </Button>
