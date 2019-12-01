@@ -92,19 +92,19 @@ function EventReview(props) {
                 food === "Cottage Cheese Toast" ? "show-detail" : "hide-detail"
               }`}
             >
-              <li>sprouted toast</li>
-              <li>cottage cheese</li>
-              <li>avocado</li>
+              <li>Sprouted Toast</li>
+              <li>Cottage Cheese</li>
+              <li>Avocado</li>
             </ul>
             <ul
               className={`${
                 food === "Smoked Salmon Bagel" ? "show-detail" : "hide-detail"
               }`}
             >
-              <li>whole-wheat bagel</li>
-              <li>cream cheese</li>
-              <li>smoked salmon </li>
-              <li>alfalfa sprouts</li>
+              <li>Whole-Wheat Bagel</li>
+              <li>Cream Cheese</li>
+              <li>Smoked Salmon </li>
+              <li>Alfalfa Sprouts</li>
             </ul>
             <ul
               className={`${
@@ -113,12 +113,12 @@ function EventReview(props) {
                   : "hide-detail"
               }`}
             >
-              <li>Yukon Gold potatoes</li>
-              <li>Olive oil</li>
-              <li>Chicken, thigh, stewed, skin not eaten</li>
-              <li>broccoli florets</li>
-              <li>roasted red peppers</li>
-              <li>slivered almonds</li>
+              <li>Yukon Gold Potatoes</li>
+              <li>Olive Oil</li>
+              <li>Chicken, Thigh, Stewed, Without Skin</li>
+              <li>Broccoli Florets</li>
+              <li>Roasted Red Peppers</li>
+              <li>Slivered Almonds</li>
             </ul>
             <ul
               className={`${
@@ -127,17 +127,15 @@ function EventReview(props) {
                   : "hide-detail"
               }`}
             >
-              <li>natural pork tenderloin</li>
-              <li>chopped cauliflower</li>
-              <li>Olive oil</li>
-              <li>
-                no-salt-added diced tomatoes with basil, garlic, and oregano, undrained
-              </li>
-              <li>reduced-sodium chicken broth</li>
-              <li>mild banana peppers</li>
-              <li>light sour cream</li>
-              <li>all-purpose flour</li>
-              <li>medium onion</li>
+              <li>Natural Pork Tenderloin</li>
+              <li>Chopped Cauliflower</li>
+              <li>Olive Oil</li>
+              <li>No-Salt-Added Diced Tomatoes With Basil, Garlic, and Oregano</li>
+              <li>Reduced-Sodium Chicken Broth</li>
+              <li>Mild Banana Peppers</li>
+              <li>Light Sour Cream</li>
+              <li>All-Purpose Flour</li>
+              <li>Medium Onion</li>
             </ul>
             <ul
               className={`${
@@ -146,15 +144,15 @@ function EventReview(props) {
                   : "hide-detail"
               }`}
             >
-              <li>salmon fillet</li>
-              <li>low-fat plain yogurt</li>
-              <li>mayonnaise</li>
-              <li>lemon juice</li>
-              <li>Parmesan cheese</li>
-              <li>chopped curly kale</li>
-              <li>chopped broccoli</li>
-              <li>chopped red cabbage</li>
-              <li>diced carrots</li>
+              <li>Salmon Fillet</li>
+              <li>Low-Fat Plain Yogurt</li>
+              <li>Mayonnaise</li>
+              <li>Lemon Juice</li>
+              <li>Parmesan Cheese</li>
+              <li>Chopped Curly Kale</li>
+              <li>Chopped Broccoli</li>
+              <li>Chopped Red Cabbage</li>
+              <li>Diced Carrots</li>
             </ul>
             <ul
               className={`${
@@ -163,13 +161,13 @@ function EventReview(props) {
                   : "hide-detail"
               }`}
             >
-              <li>red wine</li>
-              <li>can whole tomatoes</li>
-              <li>medium carrots</li>
-              <li>medium turnips</li>
-              <li>beef chuck roast</li>
-              <li>Olive oil</li>
-              <li>medium onion</li>
+              <li>Red Wine</li>
+              <li>Can Whole Tomatoes</li>
+              <li>Medium Carrots</li>
+              <li>Medium Turnips</li>
+              <li>Beef Chuck Roast</li>
+              <li>Olive Oil</li>
+              <li>Medium Onion</li>
             </ul>
           </div>
         </Typography>
