@@ -91,6 +91,7 @@ export default function Calendar(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [weekDays, setWeekDays] = useState(getWeekDays());
   const [tasks, setTasks] = useState([]);
+
   useEffect(() => {
     if (props.tasks) {
       setTasks(props.tasks);

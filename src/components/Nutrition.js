@@ -21,12 +21,13 @@ function Nutrition(props) {
   //     console.error(error);
   //   }
   // }
+  console.log(props);
 
   const nutritionLabel = (calories, protein, fat, carbs, water, sugar, fiber) => (
     <div>
       <section class="performance-facts">
         <header class="performance-facts__header">
-          <h1>props.location.name</h1>
+          <h1>{props.location.name}</h1>
           <h1 class="performance-facts__title">Nutrition Facts</h1>
           <p>Serving Size 100 g</p>
         </header>
@@ -104,7 +105,7 @@ function Nutrition(props) {
         ? nutritionLabel(205, 14.3, 0, 36.82, 46.61, 2.86, 5.7)
         : props.location.id === 336750
         ? nutritionLabel(81, 10.45, 2.27, 4.76, 81.24, 4, 0)
-        : props.location.id === 336750
+        : props.location.id === 562115
         ? nutritionLabel(167, 0, 15, 10, 1, 6.7, 6.7)
         : ""}
     </div>

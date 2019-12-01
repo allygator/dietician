@@ -104,7 +104,7 @@ function EventReview(props) {
                 to={{
                   pathname: "/nutrition",
                   id: 336750,
-                  name: "Sprouted Toast",
+                  name: "Cottage Cheese",
                 }}
               >
                 <li>Cottage Cheese</li>
@@ -114,7 +114,7 @@ function EventReview(props) {
                 to={{
                   pathname: "/nutrition",
                   id: 562115,
-                  name: "Sprouted Toast",
+                  name: "Avocado",
                 }}
               >
                 <li>Avocado</li>
