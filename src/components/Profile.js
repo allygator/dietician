@@ -134,8 +134,8 @@ function Profile(props) {
       })
       .then(() => {
         // Success: do something here
-        // history.push("/dashboard");
         console.log("success");
+        props.directToCalendar();
       })
       .catch(err => {
         console.log("err", err);
