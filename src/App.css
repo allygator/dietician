@@ -197,11 +197,23 @@ a {
     height: 100%;
 }
 
+.home section:nth-child(2) {
+    margin-top: -20vh;
+    padding-top: 20vh;
+    /* height: 40vh; */
+    background-color: #292d3e;
+    color: white;
+}
+
 .home section:nth-child(2) h1 {
-    color: var(--dark-purple);
+    color: var(--bright-blue);
 }
 
 .home section:nth-child(3) h1 {
+    color: var(--dark-purple);
+}
+
+.home section:nth-child(4) h1 {
     color: var(--purple);
 }
 
@@ -215,7 +227,7 @@ a {
     margin: auto;
 }
 
-.home section:nth-child(3)>div>div{
+.home section:nth-child(4)>div>div{
     display: flex;
     justify-content: space-between;
     align-items: center;

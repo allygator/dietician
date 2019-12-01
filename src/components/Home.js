@@ -45,6 +45,20 @@ function App() {
       </header>
       <section>
         <div>
+          <h1>What is Diet Life?</h1>
+          <h4>
+            Diet life is your online dietician. Let Diet Life know a bit about you and
+            Diet Life will provide you with an exercise and eating schedule to maximize
+            your goals.
+          </h4>
+          <h4>
+            Diet Life provides nutrition facts for the meals we provide you can be in
+            control of your healthy lifestyle.
+          </h4>
+        </div>
+      </section>
+      <section>
+        <div>
           <h1>Developers</h1>
           <h2>
             Built by Alyssa Davis, Jose Perez, Toan Vu, Weining Li, and Charles Stephens
