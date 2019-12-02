@@ -89,9 +89,9 @@ function Login() {
     } else {
       signin(email, pass);
     }
-    if (!addErr && !passErr && errMsg.length < 1) {
-      console.log("test");
-    }
+    // if (!addErr && !passErr && errMsg.length < 1) {
+    //   console.log("test");
+    // }
   }
 
   const fields = (
