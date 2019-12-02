@@ -296,3 +296,7 @@ a {
 #profile>div {
     justify-content: space-between;
 }
+
+#profile>div:nth-child(3)>div {
+    width: calc(97%/4);
+}
