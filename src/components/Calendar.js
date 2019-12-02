@@ -104,15 +104,19 @@ export default function Calendar(props) {
           .doc(userData.authUser.uid)
           .get()
           .then(doc => {
-            // const { fullSchedule = sampleTask } = x.data();
-            const { fullSchedule = [] } = doc.data();
-            setTasks(fullSchedule);
+            const { fullSchedule } = doc.data();
+
+            if (!fullSchedule) {
+              props.directTo("Profile");
+            } else {
+              setTasks(fullSchedule);
+            }
           })
           .catch(err => console.log("err", err))
           .finally(() => setIsLoading(false));
       }
     }
-  }, [props.tasks, firebase.db, userData.authUser]);
+  }, [firebase.db, userData.authUser, props]);
 
   const handleChange = ({ target }) => {
     const { value } = target;
