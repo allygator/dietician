@@ -151,7 +151,7 @@ function Profile(props) {
       .then(() => {
         // Success: do something here
         console.log("success");
-        props.directToCalendar();
+        props.directTo("Calendar");
       })
       .catch(err => {
         console.log("err", err);
