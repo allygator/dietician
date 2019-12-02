@@ -289,10 +289,14 @@ a {
     align-self: flex-end;
 }
 
-#profile .makeStyles-inputGroup-241:nth-child(2)>div {
+#profile>div:nth-child(2)>div {
     width: 48%;
 }
 
-.makeStyles-inputGroup-241 {
+#profile>div {
     justify-content: space-between;
+}
+
+#profile>div:nth-child(3)>div {
+    width: calc(97%/4);
 }
