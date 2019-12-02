@@ -289,7 +289,7 @@ a {
     align-self: flex-end;
 }
 
-#profile div:nth-child(2)>div {
+#profile>div:nth-child(2)>div {
     width: 48%;
 }
 
