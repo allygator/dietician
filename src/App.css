@@ -273,7 +273,7 @@ a {
     margin-top: 20vh;
 }
 
-.signin #error {
+#error {
     color: red;
     font-weight: bold;
 }
@@ -287,4 +287,12 @@ a {
 
 .login_fields button {
     align-self: flex-end;
+}
+
+#profile .makeStyles-inputGroup-241:nth-child(2)>div {
+    width: 48%;
+}
+
+.makeStyles-inputGroup-241 {
+    justify-content: space-between;
 }

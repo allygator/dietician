@@ -50,6 +50,8 @@ function Profile(props) {
     firstName: "",
     lastName: "",
     height: "",
+    heightft: "",
+    heightin: "",
     weight: "",
     age: "",
     gender: "",
@@ -66,7 +68,21 @@ function Profile(props) {
   }, [profileInputs]);
 
   const handleChangeIn = name => event => {
-    setProfile({ ...profileInputs, [name]: event.target.value });
+    if (name === "heightft") {
+      setProfile({
+        ...profileInputs,
+        heightft: event.target.value,
+        height: event.target.value * 12,
+      });
+    } else if (name === "heightin") {
+      setProfile({
+        ...profileInputs,
+        heightin: event.target.value,
+        height: profileInputs.height + event.target.value,
+      });
+    } else {
+      setProfile({ ...profileInputs, [name]: event.target.value });
+    }
   };
 
   const handleScheduleIn = value => {
@@ -77,7 +93,7 @@ function Profile(props) {
     const { firstName, lastName, height, weight, age, gender } = profileInputs;
 
     if (!firstName || !lastName || !height || !weight || !age || !gender) {
-      setError("Please enter all require fields");
+      setError("Please enter all required fields");
       return;
     }
 
@@ -127,7 +143,7 @@ function Profile(props) {
         firstName,
         lastName,
         weight: parseInt(weight),
-        height,
+        height: parseInt(height),
         age: parseInt(age),
         gender,
         fullSchedule: Object.assign({}, schedule),
@@ -151,83 +167,69 @@ function Profile(props) {
   }
 
   return (
-    <Container className={classes.root}>
+    <Container className={classes.root} id="profile">
       <h3> Personal Information</h3>
       <div className={classes.inputGroup}>
-        <FormControl className={classes.formControl}>
-          <FormLabel component="legend">First Name</FormLabel>
-          <TextField
-            value={profileInputs.firstName}
-            label="Enter"
-            variant="outlined"
-            required={true}
-            multiline
-            onChange={handleChangeIn("firstName")}
-            fullWidth
-            margin="normal"
-          />
-        </FormControl>
-
-        <FormControl className={classes.formControl}>
-          <FormLabel component="legend">Last Name</FormLabel>
-          <TextField
-            value={profileInputs.lastName}
-            label="Enter"
-            variant="outlined"
-            required={true}
-            onChange={handleChangeIn("lastName")}
-            fullWidth
-            margin="normal"
-          />
-        </FormControl>
+        <TextField
+          value={profileInputs.firstName}
+          label="First Name"
+          variant="outlined"
+          required
+          multiline
+          onChange={handleChangeIn("firstName")}
+          margin="normal"
+        />
+        <TextField
+          label="Last Name"
+          value={profileInputs.lastName}
+          onChange={handleChangeIn("lastName")}
+          variant="outlined"
+          required
+          margin="normal"
+        />
       </div>
       <div className={classes.inputGroup}>
-        <FormControl className={classes.formControl}>
-          <FormLabel component="legend">Height</FormLabel>
-
-          <TextField
-            value={profileInputs.height}
-            label="feet"
-            variant="outlined"
-            required={true}
-            multiline
-            onChange={handleChangeIn("height")}
-            fullWidth
-            margin="normal"
-          />
-        </FormControl>
-
-        <FormControl className={classes.formControl}>
-          <FormLabel component="legend">Weight</FormLabel>
-
-          <TextField
-            id="weight"
-            value={profileInputs.weight}
-            label="lbs"
-            variant="outlined"
-            required={true}
-            onChange={handleChangeIn("weight")}
-            fullWidth
-            margin="normal"
-          />
-        </FormControl>
+        <TextField
+          id="heightft"
+          label="Height (feet)"
+          value={profileInputs.heightft}
+          onChange={handleChangeIn("heightft")}
+          type="number"
+          variant="outlined"
+          required
+          margin="normal"
+        />
+        <TextField
+          id="heightin"
+          label="Height (inches)"
+          value={profileInputs.heightin}
+          onChange={handleChangeIn("heightin")}
+          type="number"
+          variant="outlined"
+          required
+          margin="normal"
+        />
+        <TextField
+          id="weight"
+          label="Weight (lbs)"
+          value={profileInputs.weight}
+          onChange={handleChangeIn("weight")}
+          type="number"
+          variant="outlined"
+          required
+          margin="normal"
+        />
+        <TextField
+          id="age"
+          label="Age"
+          value={profileInputs.age}
+          onChange={handleChangeIn("age")}
+          type="number"
+          variant="outlined"
+          required
+          margin="normal"
+        />
       </div>
-      <div className={classes.inputGroup}>
-        <FormControl component="fieldset" className={classes.formControl}>
-          <FormLabel component="legend">Age</FormLabel>
-          <TextField
-            id="age"
-            value={profileInputs.age}
-            label="Enter"
-            variant="outlined"
-            required={true}
-            onChange={handleChangeIn("age")}
-            fullWidth
-            margin="normal"
-          />
-        </FormControl>
-      </div>
-
       <div className={classes.inputGroup}>
         <FormControl component="fieldset" className={classes.formControl}>
           <FormLabel component="legend">Gender</FormLabel>
@@ -271,7 +273,7 @@ function Profile(props) {
       >
         Submit
       </Button>
-      {error ? <p>{error}</p> : null}
+      {error ? <p id="error">{error}</p> : null}
     </Container>
   );
 }
