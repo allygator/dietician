@@ -24,6 +24,7 @@ function Nutrition(props) {
       // if (responseJson.labelNutrients) {
       //   nutrition["labelNutrients"] = responseJson.labelNutrients;
       // }
+      console.log(responseJson);
       return responseJson;
     } catch (error) {
       console.error(error);
