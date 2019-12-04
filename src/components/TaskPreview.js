@@ -171,12 +171,60 @@ function EventReview(props) {
                   : "hide-detail"
               }`}
             >
-              <li>Yukon Gold Potatoes</li>
-              <li>Olive Oil</li>
-              <li>Chicken, Thigh, Stewed, Without Skin</li>
-              <li>Broccoli Florets</li>
-              <li>Roasted Red Peppers</li>
-              <li>Slivered Almonds</li>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 472938,
+                  name: "Yukon Gold Potatoes",
+                }}
+              >
+                <li>Yukon Gold Potatoes</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 343873,
+                  name: "Olive Oil",
+                }}
+              >
+                <li>Olive Oil</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 337248,
+                  name: "Chicken, Thigh, Stewed, Without Skin",
+                }}
+              >
+                <li>Chicken, Thigh, Stewed, Without Skin</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 449411,
+                  name: "Broccoli Florets",
+                }}
+              >
+                <li>Broccoli Florets</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 389019,
+                  name: "Roasted Red Peppers",
+                }}
+              >
+                <li>Roasted Red Peppers</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 415959,
+                  name: "Slivered Almonds",
+                }}
+              >
+                <li>Slivered Almonds</li>
+              </Link>
             </ul>
             <ul
               className={`${
@@ -185,15 +233,87 @@ function EventReview(props) {
                   : "hide-detail"
               }`}
             >
-              <li>Natural Pork Tenderloin</li>
-              <li>Chopped Cauliflower</li>
-              <li>Olive Oil</li>
-              <li>No-Salt-Added Diced Tomatoes With Basil, Garlic, and Oregano</li>
-              <li>Reduced-Sodium Chicken Broth</li>
-              <li>Mild Banana Peppers</li>
-              <li>Light Sour Cream</li>
-              <li>All-Purpose Flour</li>
-              <li>Medium Onion</li>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 336941,
+                  name: "Natural Pork Tenderloin",
+                }}
+              >
+                <li>Natural Pork Tenderloin</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 555592,
+                  name: "Chopped Cauliflower",
+                }}
+              >
+                <li>Chopped Cauliflower</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 343873,
+                  name: "Olive Oil",
+                }}
+              >
+                <li>Olive Oil</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 170458,
+                  name: "No-Salt-Added Diced Tomatoes With Basil, Garlic, and Oregano",
+                }}
+              >
+                <li>No-Salt-Added Diced Tomatoes With Basil, Garlic, and Oregano</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 172888,
+                  name: "Reduced-Sodium Chicken Broth",
+                }}
+              >
+                <li>Reduced-Sodium Chicken Broth</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 527323,
+                  name: "Mild Banana Peppers",
+                }}
+              >
+                <li>Mild Banana Peppers</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 409666,
+                  name: "Light Sour Cream",
+                }}
+              >
+                <li>Light Sour Cream</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 450703,
+                  name: "All-Purpose Flour",
+                }}
+              >
+                <li>All-Purpose Flour</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 170000,
+                  name: "Medium Onion",
+                }}
+              >
+                <li>Medium Onion</li>
+              </Link>
             </ul>
             <ul
               className={`${
@@ -202,15 +322,87 @@ function EventReview(props) {
                   : "hide-detail"
               }`}
             >
-              <li>Salmon Fillet</li>
-              <li>Low-Fat Plain Yogurt</li>
-              <li>Mayonnaise</li>
-              <li>Lemon Juice</li>
-              <li>Parmesan Cheese</li>
-              <li>Chopped Curly Kale</li>
-              <li>Chopped Broccoli</li>
-              <li>Chopped Red Cabbage</li>
-              <li>Diced Carrots</li>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 531790,
+                  name: "Salmon Fillet",
+                }}
+              >
+                <li>Salmon Fillet</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 531790,
+                  name: "Low-Fat Plain Yogurt",
+                }}
+              >
+                <li>Low-Fat Plain Yogurt</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 401221,
+                  name: "Mayonnaise",
+                }}
+              >
+                <li>Mayonnaise</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 549287,
+                  name: "Lemon Juice",
+                }}
+              >
+                <li>Lemon Juice</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 402750,
+                  name: "Parmesan Cheese",
+                }}
+              >
+                <li>Parmesan Cheese</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 474729,
+                  name: "Chopped Curly Kale",
+                }}
+              >
+                <li>Chopped Curly Kale</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 491942,
+                  name: "Chopped Broccoli",
+                }}
+              >
+                <li>Chopped Broccoli</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 343651,
+                  name: "Chopped Red Cabbage",
+                }}
+              >
+                <li>Chopped Red Cabbage</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 460639,
+                  name: "Diced Carrots",
+                }}
+              >
+                <li>Diced Carrots</li>
+              </Link>
             </ul>
             <ul
               className={`${
@@ -219,6 +411,69 @@ function EventReview(props) {
                   : "hide-detail"
               }`}
             >
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 344507,
+                  name: "Red Wine",
+                }}
+              >
+                <li>Red Wine</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 170501,
+                  name: "Can Whole Tomatoes",
+                }}
+              >
+                <li>Can Whole Tomatoes</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 342354,
+                  name: "Medium Carrots",
+                }}
+              >
+                <li>Medium Carrots</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 170470,
+                  name: "Medium Turnips",
+                }}
+              >
+                <li>Medium Turnips</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 534539,
+                  name: "Beef Chuck Roast",
+                }}
+              >
+                <li>Beef Chuck Roast</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 343873,
+                  name: "Olive Oil",
+                }}
+              >
+                <li>Olive Oil</li>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/nutrition",
+                  id: 170000,
+                  name: "Medium Onion",
+                }}
+              >
+                <li>Medium Onion</li>
+              </Link>
               <li>Red Wine</li>
               <li>Can Whole Tomatoes</li>
               <li>Medium Carrots</li>
