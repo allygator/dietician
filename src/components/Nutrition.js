@@ -13,6 +13,7 @@ function Nutrition(props) {
   useEffect(() => {
     getNutritionalDataFromFDC(props.location.id).then(response => {
       setData(response);
+      console.log(data);
       const portion = data.foodPortions[0].portionDescription;
       const foodNutrients = data.foodNutrients;
       let energy;
