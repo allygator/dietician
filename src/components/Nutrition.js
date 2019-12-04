@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Nutrition.css";
 
 // import { FirebaseContext } from "./Context/Firebase";
@@ -7,8 +7,7 @@ import "./Nutrition.css";
 function Nutrition(props) {
   // const firebase = useContext(FirebaseContext);
   // const userData = useContext(UserContext);
-
-  function getIDFromDatabase() {}
+  const [data, setData] = useState({});
 
   async function getNutritionalDataFromFDC(itemID) {
     try {
@@ -25,7 +24,7 @@ function Nutrition(props) {
 
   const nutritionLabel = itemID => {
     getNutritionalDataFromFDC(itemID).then(response => {
-      const data = response;
+      setData(response);
       const portion = data.foodPortions[0].portionDescription;
       const foodNutrients = data.foodNutrients;
       let energy;
@@ -141,7 +140,7 @@ function Nutrition(props) {
     });
   };
 
-  return <div onClick={getIDFromDatabase}>{nutritionLabel(props.location.id)}</div>;
+  return <div>{nutritionLabel(props.location.id)}</div>;
 }
 
 export default Nutrition;
