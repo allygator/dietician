@@ -39,7 +39,11 @@ function Nutrition(props) {
   let water;
 
   if (data.foodPortions) {
-    portion = data.foodPortions[0].portionDescription;
+    portion =
+      (data.foodPortions &&
+        data.foodPortions[0] &&
+        data.foodPortions[0].portionDescription) ||
+      "1 unit";
     const foodNutrients = data.foodNutrients;
 
     foodNutrients.forEach(nutrient => {
