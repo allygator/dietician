@@ -474,13 +474,6 @@ function EventReview(props) {
               >
                 <li>Medium Onion</li>
               </Link>
-              <li>Red Wine</li>
-              <li>Can Whole Tomatoes</li>
-              <li>Medium Carrots</li>
-              <li>Medium Turnips</li>
-              <li>Beef Chuck Roast</li>
-              <li>Olive Oil</li>
-              <li>Medium Onion</li>
             </ul>
           </div>
         </Typography>
