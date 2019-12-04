@@ -32,7 +32,7 @@ function Nutrition(props) {
 
   const nutritionLabel = itemID => {
     const data = getNutritionalDataFromFDC(itemID);
-    const portion = data.foodPortions.portionDescription;
+    const portion = data.foodPortions[0].portionDescription;
     const foodNutrients = data.foodNutrients;
     let energy;
     let protein;
