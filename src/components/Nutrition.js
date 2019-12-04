@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Nutrition.css";
 
 // import { FirebaseContext } from "./Context/Firebase";
@@ -8,22 +8,10 @@ function Nutrition(props) {
   // const firebase = useContext(FirebaseContext);
   // const userData = useContext(UserContext);
   const [data, setData] = useState({});
+  const label = [];
 
-  async function getNutritionalDataFromFDC(itemID) {
-    try {
-      const response = await fetch(
-        `https://api.nal.usda.gov/fdc/v1/${itemID}?api_key=${process.env.REACT_APP_FDC_API}`
-      );
-      const responseJson = await response.json();
-      console.log(responseJson);
-      return responseJson;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  const nutritionLabel = itemID => {
-    getNutritionalDataFromFDC(itemID).then(response => {
+  useEffect(() => {
+    getNutritionalDataFromFDC(props.location.id).then(response => {
       setData(response);
       const portion = data.foodPortions[0].portionDescription;
       const foodNutrients = data.foodNutrients;
@@ -62,7 +50,7 @@ function Nutrition(props) {
         }
       });
 
-      return (
+      label.push(
         <div>
           <section class="performance-facts">
             <header class="performance-facts__header">
@@ -138,9 +126,22 @@ function Nutrition(props) {
         </div>
       );
     });
-  };
+  }, []);
 
-  return <div>{nutritionLabel(props.location.id)}</div>;
+  async function getNutritionalDataFromFDC(itemID) {
+    try {
+      const response = await fetch(
+        `https://api.nal.usda.gov/fdc/v1/${itemID}?api_key=${process.env.REACT_APP_FDC_API}`
+      );
+      const responseJson = await response.json();
+      console.log(responseJson);
+      return responseJson;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  return <div>{label}</div>;
 }
 
 export default Nutrition;
