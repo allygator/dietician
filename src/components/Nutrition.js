@@ -109,15 +109,17 @@ function Nutrition(props) {
               </td>
             </tr>
             <tr>
-              <td colspan="2"></td>
-              <th>Total lipid (fat) </th>
+              <th colspan="2">
+                <b>Total lipid (fat)</b>
+              </th>
               <td>
                 <b> {fat || "?"} g</b>
               </td>
             </tr>
             <tr>
-              <td colspan="2"></td>
-              <th>Carbohydrate, by difference </th>
+              <th colspan="2">
+                <b>Carbohydrate, by difference</b>
+              </th>
               <td>
                 <b> {carbs || "?"} g</b>
               </td>
@@ -139,8 +141,9 @@ function Nutrition(props) {
               </td>
             </tr>
             <tr>
-              <td colspan="2"></td>
-              <th>Dietary Fiber</th>
+              <th colspan="2">
+                <b>Dietary Fiber</b>
+              </th>
               <td>
                 <b>{fiber || "?"} g</b>
               </td>
