@@ -134,7 +134,7 @@ function Profile(props) {
   };
 
   const handleSecondForm = schedule => {
-    const { firstName, lastName, height, weight, age, gender } = profileInputs;
+    const { firstName, lastName, height, weight, age, gender, training } = profileInputs;
 
     firebase.db
       .collection("users")
@@ -146,6 +146,7 @@ function Profile(props) {
         height: parseInt(height),
         age: parseInt(age),
         gender,
+        training,
         fullSchedule: Object.assign({}, schedule),
       })
       .then(() => {
