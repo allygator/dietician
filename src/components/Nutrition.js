@@ -8,124 +8,11 @@ function Nutrition(props) {
   // const firebase = useContext(FirebaseContext);
   // const userData = useContext(UserContext);
   const [data, setData] = useState({});
-  const label = [];
 
   useEffect(() => {
     getNutritionalDataFromFDC(props.location.id).then(response => {
       setData(response);
-      console.log(response);
-      const portion = data.foodPortions[0].portionDescription;
-      const foodNutrients = data.foodNutrients;
-      let energy;
-      let protein;
-      let fat;
-      let carbs;
-      let sugars;
-      let fiber;
-      let water;
-      foodNutrients.forEach(nutrient => {
-        switch (nutrient.nutrient.name) {
-          case "Protein":
-            protein = nutrient.amount;
-            break;
-          case "Total lipid (fat)":
-            fat = nutrient.amount;
-            break;
-          case "Carbohydrate, by difference":
-            carbs = nutrient.amount;
-            break;
-          case "Energy":
-            energy = nutrient.amount;
-            break;
-          case "Sugars, total including NLEA":
-            sugars = nutrient.amount;
-            break;
-          case "Fiber, total dietary":
-            fiber = nutrient.amount;
-            break;
-          case "Water":
-            water = nutrient.amount;
-            break;
-          default:
-            break;
-        }
-      });
-
-      label.push(
-        <div>
-          <section class="performance-facts">
-            <header class="performance-facts__header">
-              <h1>{props.location.name}</h1>
-              <h1 class="performance-facts__title">Nutrition Facts</h1>
-              <p>Serving Size {portion}</p>
-            </header>
-            <table class="performance-facts__table">
-              <thead>
-                <tr>
-                  <th colspan="3" class="small-info">
-                    Amount Per Serving
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th colspan="2">
-                    <b>Calories </b>
-                  </th>
-                  <td>
-                    <b>{energy || "?"} kcal</b>
-                  </td>
-                </tr>
-                <tr>
-                  <th colspan="2">
-                    <b>Protein </b>
-                  </th>
-                  <td>
-                    <b> {protein || "?"} g</b>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="blank-cell"></td>
-                  <th>Total lipid (fat) </th>
-                  <td>
-                    <b> {fat || "?"} g</b>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="blank-cell"></td>
-                  <th>Carbohydrate, by difference </th>
-                  <td>
-                    <b> {carbs || "?"} g</b>
-                  </td>
-                </tr>
-                <tr>
-                  <th class="blank-cell">
-                    <b>Sugars</b>
-                  </th>
-                  <td>
-                    <b>{sugars || "?"} g</b>
-                  </td>
-                </tr>
-                <tr>
-                  <th class="blank-cell">
-                    <b>Water</b>
-                  </th>
-                  <td>
-                    <b>{water || "?"} g</b>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="blank-cell"></td>
-                  <th>Dietary Fiber</th>
-                  <td>
-                    <b>{fiber || "?"} g</b>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </section>
-        </div>
-      );
+      console.log(data);
     });
   }, []);
 
@@ -142,7 +29,123 @@ function Nutrition(props) {
     }
   }
 
-  return <div>{label}</div>;
+  let portion;
+  let energy;
+  let protein;
+  let fat;
+  let carbs;
+  let sugars;
+  let fiber;
+  let water;
+
+  if (data.foodPortions) {
+    portion = data.foodPortions[0].portionDescription;
+    const foodNutrients = data.foodNutrients;
+
+    foodNutrients.forEach(nutrient => {
+      switch (nutrient.nutrient.name) {
+        case "Protein":
+          protein = nutrient.amount;
+          break;
+        case "Total lipid (fat)":
+          fat = nutrient.amount;
+          break;
+        case "Carbohydrate, by difference":
+          carbs = nutrient.amount;
+          break;
+        case "Energy":
+          energy = nutrient.amount;
+          break;
+        case "Sugars, total including NLEA":
+          sugars = nutrient.amount;
+          break;
+        case "Fiber, total dietary":
+          fiber = nutrient.amount;
+          break;
+        case "Water":
+          water = nutrient.amount;
+          break;
+        default:
+          break;
+      }
+    });
+  }
+
+  return (
+    <div>
+      <section class="performance-facts">
+        <header class="performance-facts__header">
+          <h1>{props.location.name}</h1>
+          <h1 class="performance-facts__title">Nutrition Facts</h1>
+          <p>Serving Size {portion}</p>
+        </header>
+        <table class="performance-facts__table">
+          <thead>
+            <tr>
+              <th colspan="3" class="small-info">
+                Amount Per Serving
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th colspan="2">
+                <b>Calories </b>
+              </th>
+              <td>
+                <b>{energy || "?"} kcal</b>
+              </td>
+            </tr>
+            <tr>
+              <th colspan="2">
+                <b>Protein </b>
+              </th>
+              <td>
+                <b> {protein || "?"} g</b>
+              </td>
+            </tr>
+            <tr>
+              <td class="blank-cell"></td>
+              <th>Total lipid (fat) </th>
+              <td>
+                <b> {fat || "?"} g</b>
+              </td>
+            </tr>
+            <tr>
+              <td class="blank-cell"></td>
+              <th>Carbohydrate, by difference </th>
+              <td>
+                <b> {carbs || "?"} g</b>
+              </td>
+            </tr>
+            <tr>
+              <th class="blank-cell">
+                <b>Sugars</b>
+              </th>
+              <td>
+                <b>{sugars || "?"} g</b>
+              </td>
+            </tr>
+            <tr>
+              <th class="blank-cell">
+                <b>Water</b>
+              </th>
+              <td>
+                <b>{water || "?"} g</b>
+              </td>
+            </tr>
+            <tr>
+              <td class="blank-cell"></td>
+              <th>Dietary Fiber</th>
+              <td>
+                <b>{fiber || "?"} g</b>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+  );
 }
 
 export default Nutrition;
